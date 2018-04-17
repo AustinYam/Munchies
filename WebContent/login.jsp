@@ -226,54 +226,6 @@
 		<!-- /container -->
 	</div>
 	<!-- /NAVIGATION -->
-	<div id="navigation">
-		<!-- container -->
-		<div class="container">
-			<div id="responsive-nav">
-				<!-- category nav -->
-				<div class="category-nav show-on-click">
-					<div class="category-nav">
-						<span class="category-header">Categories <i class="fa fa-list"></i></span>
-						<ul class="category-list">
-							<li class="dropdown side-dropdown">
-								<a class="dropdown-toggle" href = "beverages.jsp">Beverages<i class="fa fa-angle-right"></i></a>
-							</li>
-							<li class="dropdown side-dropdown">
-								<a class="dropdown-toggle" href = "baking.jsp">Baking<i class="fa fa-angle-right"></i></a>
-							</li>
-							<li class="dropdown side-dropdown">
-								<a class="dropdown-toggle" href = "breakfast.jsp">Breakfast & Cereal<i class="fa fa-angle-right"></i></a>
-							</li>
-							<li class="dropdown side-dropdown">
-								<a class="dropdown-toggle" href = "frozenfood.jsp">Frozen Foods<i class="fa fa-angle-right"></i></a>
-							</li>
-							<li class="dropdown side-dropdown">
-								<a class="dropdown-toggle" href = "grain.jsp">Grains & Pasta<i class="fa fa-angle-right"></i></a>
-							</li>
-							<li class="dropdown side-dropdown">
-								<a class="dropdown-toggle" href = "produce.jsp">Produce<i class="fa fa-angle-right"></i></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!-- /category nav -->
-
-				<!-- menu nav -->
-				<div class="menu-nav">
-					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
-					<ul class="menu-list">
-						<li><a href="./index.jsp">Home</a></li>
-						<li><a href="#">Shop</a></li>
-					</ul>
-				</div>
-				<!-- menu nav -->
-			</div>
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /NAVIGATION -->
-
-
 	<!-- BREADCRUMB -->
 	<div id="breadcrumb">
 		<div class="container">

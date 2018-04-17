@@ -53,8 +53,14 @@
     <url-pattern>/LoginAPI</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>CategoryAPI</display-name>
+    <servlet-name>LogoutAPI</servlet-name>
+    <servlet-class>org.elluck91.munchies.LogoutAPI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutAPI</servlet-name>
+    <url-pattern>/LogoutAPI</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>CategoryAPI</servlet-name>
     <servlet-class>org.elluck91.munchies.CategoryAPI</servlet-class>
   </servlet>
@@ -62,7 +68,5 @@
     <servlet-name>CategoryAPI</servlet-name>
     <url-pattern>/CategoryAPI</url-pattern>
   </servlet-mapping>
-  
-
 </web-app>
 

@@ -1,37 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.elluck91.munchies;
 
-import java.sql.Date;
-
-/**
- *
- * @author elluck91
- */
 public class Product {
-    public String name;
-	public float price;
-	public String img; 
+	String name;
+	String uniqueName;
+	double price;
+	String description;
+	String imgUrl;
 	
-	public Product(){
-		super();
+	Product() {
+		name = "Product Name";
+		uniqueName = "Unique Product Name";
+		price = 10.99;
+		description = "Default product description.";
+		imgUrl = "WebContent/foodimg/baking/baking.jpeg";
 	}
-	
-	public void setName(String s){
-		this.name = s;
-	}
-	
-	public void setPrice(float n){
-		this.price = n;
-	}
-	
-	public void setImg(String i){
-		this.img = i;
-	}
-	
-		
 }
