@@ -155,6 +155,7 @@
 											</div>
 											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 										</div>
+										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
 										<button class="main-btn">View Cart</button>
