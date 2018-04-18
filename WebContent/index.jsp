@@ -85,18 +85,23 @@
 								if (username == null){
 							%>
 							<a href="./login.jsp" class="text-uppercase">Login</a> / <a href="./register.jsp" class="text-uppercase">Join</a>
-							<%
-								}else {
-							%>
-							<a>Hi, <%= request.getSession().getAttribute("userid")%></a>
-							<a href = "LogoutAPI">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
-								<% }%>
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="./checkout.jsp"><i class="fa fa-check"></i> Checkout</a></li>
 								<li><a href="./login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								<li><a href="./register.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
 							</ul>
+							<%
+								}else {
+							%>
+							<a>Hi, <%= request.getSession().getAttribute("userid")%></a>
+							<a href = "LogoutAPI">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+								
+							<ul class="custom-menu">
+								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="./checkout.jsp"><i class="fa fa-check"></i> Checkout</a></li>
+							</ul>
+							<% }%>
 						</li>
 						<!-- /Account -->	
 
@@ -159,7 +164,7 @@
 									</div>
 									<div class="shopping-cart-btns">
 										<button class="main-btn">View Cart</button>
-										<button class="primary-btn" href = "checkout.jsp">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>
@@ -362,16 +367,28 @@
 				<!-- /footer widget -->
 
 				<!-- footer widget -->
+				<% 
+								if (username == null){
+							%>
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="footer">
+						<h3 class="footer-header">My Account</h3>
+						<ul class="list-links">
+							<li><a href="./login.jsp">Login</a></li>
+						</ul>
+					</div>
+				</div>
+								<%} else {%>
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
 						<h3 class="footer-header">My Account</h3>
 						<ul class="list-links">
 							<li><a href="#">My Account</a></li>
-							<li><a href="#">Checkout</a></li>
-							<li><a href="#">Login</a></li>
+							<li><a href="./checkout.jsp">Checkout</a></li>
 						</ul>
 					</div>
 				</div>
+								<%}%>
 				<!-- /footer widget -->
 
 				<div class="clearfix visible-sm visible-xs"></div>
