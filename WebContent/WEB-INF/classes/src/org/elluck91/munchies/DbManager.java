@@ -37,7 +37,7 @@ public class DbManager implements IRepo{
 
 			Class.forName("com.mysql.jdbc.Driver");
 
-			con  = DriverManager.getConnection("jdbc:mysql://localhost:3307/munchies","root","Jedi96t20");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
 
 			//con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","elluck91","blank");
 
@@ -81,8 +81,7 @@ public class DbManager implements IRepo{
 			Class.forName("com.mysql.jdbc.Driver");
 			//con  = DriverManager.getConnection("jdbc:mysql://localhost/Students","cmpe133","cmpe133_Spring2018!");
 
-			con  = DriverManager.getConnection("jdbc:mysql://localhost:3307/munchies","root","Jedi96t20");
-
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
 
 			//con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","elluck91","blank");
 
@@ -123,8 +122,7 @@ public class DbManager implements IRepo{
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			con  = DriverManager.getConnection("jdbc:mysql://localhost:3307/munchies","root","Jedi96t20");
-
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
 			//con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","elluck91","blank");
 
 

@@ -270,7 +270,8 @@
 					<!-- /store top filter -->
 
 					<!-- STORE -->
-						<c:forEach items = "${productList}" var = "record">
+				<form action ="CategoryAPI" method = "get">
+						<c:forEach items = "${list}" var = "record">
 							<div id="store">
 								<!-- row -->
 								<div class="row">
@@ -308,11 +309,18 @@
 										</div>
 									</div>
 									<!-- /Product Single -->
-									<div class="clearfix visible-md visible-lg"></div>						
+									<%
+										int count = 0;
+										count++;
+										if(count % 3 == 0){ 
+									%>
+										<div class="clearfix visible-md visible-lg"></div>
+										<%}%>			
 								</div>
 								<!-- /row -->
 							</div>
 						</c:forEach>
+				</form>
 					<!-- /STORE -->
 				</div>
 				<!-- /MAIN -->

@@ -133,14 +133,14 @@
 										<%
 											if (request.getSession().getAttribute("cart") != null){
 										%>
-										<forEach: item = "${cart}" value = "record">
+										<c:forEach item = "${cart}" var = "product">
 											<div class="product product-widget">
 												<div class="product-thumb">
 													<img src= "" alt="nope">
 												</div>
 												<div class="product-body">
-													<h3 class="product-price">price: $<span class="qty"><c:out value = "${record.price}"/></span></h3>
-													<h2 class="product-name"><a href="#"><c:out value = "${record.name}"/></a></h2>
+													<h3 class="product-price">price: $<span class="qty"><c:out value = "${product.price}"/></span></h3>
+													<h2 class="product-name"><a href="#"><c:out value = "${product.name}"/></a></h2>
 												</div>
 												<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 											</div>
