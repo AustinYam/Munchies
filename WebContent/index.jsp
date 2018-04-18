@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
 <html lang="en">
 
 <head>
@@ -101,6 +103,19 @@
 						<!-- /Account -->	
 
 						<!-- Cart -->
+						<%
+							if(request.getSession().getAttribute("cart") != null){
+								ArrayList<Product> itemsArray = (ArrayList<Product>) request.getAttribute("cart");
+								int quantity = 0;
+								double total = 0;
+								for (Product p : itemsArray){
+									quantity++;
+									total += p.getPrice();
+								}
+								request.setAttribute("quantity", quantity);
+								request.setAttribute("total", total);
+							}
+						%>
 						<li class="header-cart dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
@@ -112,7 +127,7 @@
 									<% 
 										}else {
 									%>
-									<span class="qty"><%= request.getSession().getAttribute("quantity")%></span>
+									<span class="qty"><c:out value = "${quantity}"/></span>
 									<%} %>
 								</div>
 								<strong class="text-uppercase">My Cart:</strong>
@@ -124,7 +139,7 @@
 									<%
 									}else {
 									%>
-									<span>$ <%= request.getSession().getAttribute("total")%></span>
+									<span>$ <c:out value = "${total}"/></span>
 									<%}%>
 							</a>
 							<div class="custom-menu">
@@ -133,10 +148,10 @@
 										<%
 											if (request.getSession().getAttribute("cart") != null){
 										%>
-										<c:forEach item = "${cart}" var = "product">
+										<c:forEach items = "${cart}" var = "product">
 											<div class="product product-widget">
 												<div class="product-thumb">
-													<img src= "" alt="nope">
+													<img src= "${product.imgUrl}" alt="nope">
 												</div>
 												<div class="product-body">
 													<h3 class="product-price">price: $<span class="qty"><c:out value = "${product.price}"/></span></h3>
@@ -144,6 +159,7 @@
 												</div>
 												<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 											</div>
+										</c:forEach>
 										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
@@ -223,7 +239,7 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="./index.jsp">Home</a></li>
-						<li><a href="./product_info.jsp">Shop</a></li>
+						<li><a href="http://localhost:8080/WebContent/ProductAPI?productid=id">Shop</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->

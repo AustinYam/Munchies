@@ -68,5 +68,13 @@
     <servlet-name>CategoryAPI</servlet-name>
     <url-pattern>/CategoryAPI</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductAPI</servlet-name>
+    <servlet-class>org.elluck91.munchies.ProductAPI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductAPI</servlet-name>
+    <url-pattern>/ProductAPI</url-pattern>
+  </servlet-mapping>
 </web-app>
 

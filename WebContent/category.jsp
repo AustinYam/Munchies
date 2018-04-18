@@ -282,7 +282,7 @@
 												<div class="product-label">
 												</div>
 												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-												<img src=${record.picture} alt =" Image not found">
+												<img href = "http://localhost:8080/WebContent/ProductAPI?productid=id" src=${record.picture} alt =" Image not found">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">
@@ -321,6 +321,7 @@
 							</div>
 						</c:forEach>
 				</form>
+					
 					<!-- /STORE -->
 				</div>
 				<!-- /MAIN -->
