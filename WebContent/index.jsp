@@ -223,7 +223,7 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="./index.jsp">Home</a></li>
-						<li><a href="#">Shop</a></li>
+						<li><a href="./product_info.jsp">Shop</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->

@@ -2,18 +2,20 @@ package org.elluck91.munchies;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class TransactionAPI
  */
-//@WebServlet(name = "/TransactionAPI", urlPatterns = { "/TransactionAPI" })
-@WebServlet("/TransactionAPI")
+@WebServlet(name = "/TransactionAPI", urlPatterns = { "/TransactionAPI" })
+//@WebServlet("/TransactionAPI")
 public class TransactionAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,7 +39,7 @@ public class TransactionAPI extends HttpServlet {
 			out.println("<title>Servlet LoginAPI</title>");            
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<h1>Servlet Login API Can't be Used Directly !!!</h1>");
+			out.println("<h1>You successfully accessed TransactionAPI</h1>");
 			out.println("</body>");
 			out.println("</html>");
 		} finally {
@@ -49,6 +51,16 @@ public class TransactionAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+		
+		for (int i = 0; i < 6; i++) {
+			Transaction t = new Transaction();
+			for (int x = 0; x < 6; x++) {
+				t.addProduct(new Product());
+			}
+		}
 		processRequest(request, response);
 	}
 
