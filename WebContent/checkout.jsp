@@ -249,7 +249,11 @@
 				<form id="checkout-form" class="clearfix" action = "CheckoutAPI" method = "post" onSubmit = "return checkforblank()">
 					<div class="col-md-6">
 						<div class="billing-details">
-							<p>Already a customer ? <a href="#">Login</a></p>
+						<% 
+								if (username == null){
+							%>
+							<p>Already a customer ? <a href="./login.jsp">Login</a></p>
+								<% }%>
 							<div class="section-title">
 								<h3 class="title">Billing Details</h3>
 							</div>
