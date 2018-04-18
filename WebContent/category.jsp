@@ -270,8 +270,7 @@
 					<!-- /store top filter -->
 
 					<!-- STORE -->
-				<form action ="CategoryAPI" method = "get">
-						<c:forEach items = "${list}" var = "record">
+					<!--<c:forEach items = "${productList}" var = "record"> -->
 							<div id="store">
 								<!-- row -->
 								<div class="row">
@@ -282,7 +281,7 @@
 												<div class="product-label">
 												</div>
 												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-												<img href = "http://localhost:8080/WebContent/ProductAPI?productid=id" src=${record.picture} alt =" Image not found">
+												<img href = "http://localhost:8080/WebContent/ProductAPI?productid=id" src="./img/fruit.jpg" alt =" Image not found">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">
@@ -296,7 +295,7 @@
 													<i class="fa fa-star-o empty"></i>
 												</div>
 												<h2 class="product-name">
-													<a href="#">
+													<a href="http://localhost:8080/WebContent/ProductAPI?productid=id">
 														<c:out value = "${record.name}"/>
 													</a>
 												</h2>
@@ -309,19 +308,12 @@
 										</div>
 									</div>
 									<!-- /Product Single -->
-									<%
-										int count = 0;
-										count++;
-										if(count % 3 == 0){ 
-									%>
-										<div class="clearfix visible-md visible-lg"></div>
-										<%}%>			
+										<div class="clearfix visible-md visible-lg"></div>			
 								</div>
 								<!-- /row -->
 							</div>
-						</c:forEach>
-				</form>
-					
+					<!--	</c:forEach>	-->
+
 					<!-- /STORE -->
 				</div>
 				<!-- /MAIN -->
