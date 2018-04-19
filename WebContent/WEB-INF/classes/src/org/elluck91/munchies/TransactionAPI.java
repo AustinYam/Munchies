@@ -2,8 +2,10 @@ package org.elluck91.munchies;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,24 +54,51 @@ public class TransactionAPI extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		DbManager db = new DbManager();
 		
-		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+		ArrayList<Transaction> transactionListComplete = null;
 		
-		for (int i = 0; i < 6; i++) {
-			Transaction t = new Transaction();
-			for (int x = 0; x < 6; x++) {
-				t.addProduct(new Product());
+		//String transactions = db.getTransactions(request.getParameter("username"));
+		String[] transactionList = db.getTransactionList(request.getParameter("username"));
+		if (transactionList != null) {
+			transactionListComplete = new ArrayList<Transaction>();
+			Transaction tempTransaction;
+			for (String transaction : transactionList) {
+				
+				tempTransaction = db.getTransactionDetails(transaction);
+				transactionListComplete.add(tempTransaction);
+			}
+			
+			for (Transaction transaction : transactionListComplete) {
+				System.out.println(transaction.toString());
 			}
 		}
-		processRequest(request, response);
+		else {
+			System.out.println("Transaction list is empty.");
+		}
+		
+		request.setAttribute("transactionList", transactionListComplete);
+		RequestDispatcher requestDispatcher; 
+		requestDispatcher = request.getRequestDispatcher("/transaction_info.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		DbManager db = new DbManager();
+		String username = (String) request.getAttribute("username");
+		int transaction_id = (int) request.getAttribute("transaction_id");
+		String productList = (String) request.getAttribute("product_list");
+		Date date = (Date) request.getAttribute("date");
+		Double totalSum = (Double) request.getAttribute("totalSum");
+		
+		Transaction transaction = new Transaction(transaction_id, productList, date, totalSum);
+		transaction.setProductList(productList);
+		
+		db.insertTransaction(transaction);
+		db.updateUser(username, transaction_id);
 	}
 
 }

@@ -2,6 +2,8 @@ package org.elluck91.munchies;
 
 import java.util.ArrayList;
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,25 +28,20 @@ public class CategoryAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		ArrayList<Product> productList = new ArrayList<Product>();
-		// Get the category name
-		String category = request.getParameter("category");
-		
 		// connect to DB
+		DbManager db = new DbManager();
 		
-		// get the products from the DB
+		String category = null;
+		ArrayList<Product> productList = null;
 		
-		// add the products to the session
-		for (int i = 0; i < 6; i++) {
-			productList.add(new Product());
+		if ((category = request.getParameter("category")) != null) {
+			 productList = db.getCategoryProducts(category);
 		}
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("productList", productList);
-
-		response.sendRedirect("./category.jsp");
-		// forward to the page
+		request.setAttribute("categoryProducts", productList);
+		RequestDispatcher requestDispatcher; 
+		requestDispatcher = request.getRequestDispatcher("/category_info.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**

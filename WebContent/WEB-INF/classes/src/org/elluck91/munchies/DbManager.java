@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,24 +23,18 @@ public class DbManager implements IRepo{
 
 
 	Connection con ;
+	
 	public DbManager(){
-
-
 
 	}
 
 
 	@Override
 	public int Login(String username, String password) {
-
-		System.out.println("Username: " + username + " Password: " + password);
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-
-			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
-
-			//con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","elluck91","blank");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost:3306/munchies","root","admin");
 
 			PreparedStatement sql = con.prepareStatement("SELECT COUNT(*) FROM Users WHERE Username=? AND Password=sha2(?, 256)");
 			sql.setString(1, username);
@@ -49,11 +44,11 @@ public class DbManager implements IRepo{
 			ResultSet res=  sql.executeQuery();
 
 			res.next();
+
 			System.out.println("Result: " + res.getInt(1));
 
 
 			return res.getInt(1);
-
 
 		} catch (SQLException ex) {
 			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, "ex happened !!!", ex);
@@ -80,18 +75,13 @@ public class DbManager implements IRepo{
 
 			Class.forName("com.mysql.jdbc.Driver");
 			//con  = DriverManager.getConnection("jdbc:mysql://localhost/Students","cmpe133","cmpe133_Spring2018!");
-
 			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
-
-			//con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","elluck91","blank");
-
-
-			PreparedStatement sql = con.prepareStatement("INSERT INTO Users VALUES(?,sha2(?, 256),?,?,?)");
+			System.out.println("Connected with the DB.");
+			PreparedStatement sql = con.prepareStatement("INSERT INTO Users VALUES(?,sha2(?, 256),?,?)");
 			sql.setString(1, user.username);
 			sql.setString(2, user.password);
 			sql.setString(3, user.email);
-			sql.setDate(4, user.lastlogin);
-			sql.setString(5, user.name);
+			sql.setString(4, user.name);
 
 			sql.execute();
 			return 1;
@@ -123,8 +113,6 @@ public class DbManager implements IRepo{
 
 			Class.forName("com.mysql.jdbc.Driver");
 			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
-			//con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","elluck91","blank");
-
 
 			User user = new User();
 
@@ -161,6 +149,172 @@ public class DbManager implements IRepo{
 		}
 	}
 
+
+	public String[] getTransactionList(String username) {
+		String[] result = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM Users where username=?");
+			sql.setString(1, username);
+
+			ResultSet res = sql.executeQuery();
+			
+			while (res.next())
+			    result = res.getString("transactions").split(",");
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
+	public Transaction getTransactionDetails(String transaction) {
+		Transaction result = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM Transaction where transaction_id=?");
+			sql.setString(1, transaction);
+
+			ResultSet res = sql.executeQuery();
+			String[] productList;
+			Product prod;
+			while (res.next()) {
+				result = new Transaction(res.getInt("transaction_id"), res.getString("transaction_products"),
+						res.getDate("transaction_date"), res.getDouble("transaction_total"));
+				productList = res.getString("transaction_products").split(",");
+				System.out.println("List of products: " + productList);
+				for (String product : productList) {
+					System.out.println("Product:" + product);
+					prod = getProduct(product);
+					if (prod != null) {
+						System.out.println("Adding a product.");
+						result.addProduct(prod);
+					}		
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
+	public Product getProduct(String product_id) {
+		Product product = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM Product where product_id=?");
+			sql.setString(1, product_id);
+
+			ResultSet res = sql.executeQuery();
+			
+			while (res.next()) {
+				System.out.println("Found a product");
+				product = new Product(res.getString("product_uniquename"), res.getString("product_name"),
+						res.getDouble("product_price"), res.getString("product_description"),
+						res.getString("product_img"), res.getString("product_category"), res.getInt("product_id"));
+				
+			}
+			
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(product.toString());
+		return product;
+	}
+
+
+	public void insertTransaction(Transaction transaction) {
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			System.out.println("Connected with the DB.");
+			PreparedStatement sql = con.prepareStatement("INSERT INTO Transaction VALUES(?,?,?,?)");
+			sql.setInt(1, transaction.getTransaction_id());
+			sql.setDate(2, transaction.getDate());
+			sql.setDouble(3, transaction.getTotalSum());
+			sql.setString(4, transaction.getProductList());
+			sql.execute();
+			
+			
+
+		} catch (SQLException ex) {
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, "ex happened !!!", ex);
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, null, ex);
+		}catch(Exception ex){
+			Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException ex) {
+				Logger.getLogger(DbManager.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		
+	}
+
+
+	public void updateUser(String username, int transaction_id) {
+		// Needs to be implemented.
+		
+	}
+
+
+	public ArrayList<Product> getCategoryProducts(String category) {
+		ArrayList<Product> productList = new ArrayList<Product>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM Product where product_category=?");
+			sql.setString(1, category);
+
+			ResultSet res = sql.executeQuery();
+			
+			Product product;
+			while (res.next()) {
+				System.out.println("Found a product");
+				product = new Product(res.getString("product_uniquename"), res.getString("product_name"),
+						res.getDouble("product_price"), res.getString("product_description"),
+						res.getString("product_img"), res.getString("product_category"), res.getInt("product_id"));
+				productList.add(product);
+				
+			}
+			
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(productList.toString());
+		return productList;
+	}
+
 /*
 	@Override
 	public List<Post> SearchPosts(String title){
@@ -168,7 +322,7 @@ public class DbManager implements IRepo{
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","root","blank");
 
 			Post post;
 			List<Post>  posts = new ArrayList<Post>();
@@ -214,7 +368,7 @@ public class DbManager implements IRepo{
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","root","blank");
 
 			PreparedStatement sql = con.prepareStatement("INSERT INTO Posts VALUES(NULL,?,?,?,?,?,?,?,?)");
 			sql.setString(1, post.PostTitle);
@@ -255,7 +409,7 @@ public class DbManager implements IRepo{
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","root","blank");
 
 
 			Post post;
@@ -307,7 +461,7 @@ public class DbManager implements IRepo{
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			con  = DriverManager.getConnection("jdbc:mysql://localhost/blog","elluck91","blank");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","blank");
 
 			Post post;
 			List<Post>  posts = new ArrayList<Post>();
