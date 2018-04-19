@@ -246,16 +246,6 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!-- ASIDE -->
-				<div id="aside" class="col-md-3">
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Category: </h3>
-					</div>
-					<!-- /aside widget -->
-				</div>
-				<!-- /ASIDE -->
-
 				<!-- MAIN -->
 				<div id="main" class="col-md-9">
 					<!-- store top filter -->
@@ -270,49 +260,40 @@
 					<!-- /store top filter -->
 
 					<!-- STORE -->
-					<!--<c:forEach items = "${productList}" var = "record"> -->
-							<div id="store">
-								<!-- row -->
+						<div id="store">
+							<!-- row -->
 								<div class="row">
+									<c:forEach items = "${productList}" var = "record" varStatus = "loop">
 									<!-- Product Single -->
 									<div class="col-md-4 col-sm-6 col-xs-6">
 										<div class="product product-single">
 											<div class="product-thumb">
 												<div class="product-label">
 												</div>
-												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href = "http://localhost:8080/WebContent/ProductAPI?productid=id">Quick view</a></button>
 												<img href = "http://localhost:8080/WebContent/ProductAPI?productid=id" src="./img/fruit.jpg" alt =" Image not found">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">
 													<c:out value = "${record.price}"/>
 												</h3>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o empty"></i>
-												</div>
 												<h2 class="product-name">
 													<a href="http://localhost:8080/WebContent/ProductAPI?productid=id">
 														<c:out value = "${record.name}"/>
 													</a>
 												</h2>
 												<div class="product-btns">
-													<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-													<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
 													<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 												</div>
 											</div>
 										</div>
 									</div>
 									<!-- /Product Single -->
-										<div class="clearfix visible-md visible-lg"></div>			
+									<!--	<div class="clearfix visible-md visible-lg"></div>	-->
+									</c:forEach>
 								</div>
 								<!-- /row -->
-							</div>
-					<!--	</c:forEach>	-->
+						</div>
 
 					<!-- /STORE -->
 				</div>
