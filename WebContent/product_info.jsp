@@ -184,26 +184,26 @@
 						<span class="category-header">Categories <i class="fa fa-list"></i></span>
 						<ul class="category-list">			
 								<li class="dropdown side-dropdown">
-									<a class="dropdown-toggle" href = "http://localhost:8080/WebContent/CategoryAPI?category=beverages">Beverages<i class="fa fa-angle-right"></i></a>
+									<a class="dropdown-toggle" href = "./CategoryAPI?category=beverages">Beverages<i class="fa fa-angle-right"></i></a>
 								</li>
 								<li class="dropdown side-dropdown">
-									<a class="dropdown-toggle" href = "http://localhost:8080/WebContent/CategoryAPI?category=baking">Baking<i class="fa fa-angle-right"></i></a>
-								</li>
-							
-								<li class="dropdown side-dropdown">
-									<a class="dropdown-toggle" href = "http://localhost:8080/WebContent/CategoryAPI?category=breakfast">Breakfast & Cereal<i class="fa fa-angle-right"></i></a>
+									<a class="dropdown-toggle" href = "./CategoryAPI?category=baking">Baking<i class="fa fa-angle-right"></i></a>
 								</li>
 							
 								<li class="dropdown side-dropdown">
-									<a class="dropdown-toggle" href = "http://localhost:8080/WebContent/CategoryAPI?category=frozenfood">Frozen Foods<i class="fa fa-angle-right"></i></a>
+									<a class="dropdown-toggle" href = "./CategoryAPI?category=breakfast">Breakfast & Cereal<i class="fa fa-angle-right"></i></a>
 								</li>
 							
 								<li class="dropdown side-dropdown">
-									<a class="dropdown-toggle" href = "http://localhost:8080/WebContent/CategoryAPI?category=grain&pasta">Grains & Pasta<i class="fa fa-angle-right"></i></a>
+									<a class="dropdown-toggle" href = "./CategoryAPI?category=frozenfood">Frozen Foods<i class="fa fa-angle-right"></i></a>
 								</li>
 							
 								<li class="dropdown side-dropdown">
-									<a class="dropdown-toggle" href = "http://localhost:8080/WebContent/CategoryAPI?category=produce">Produce<i class="fa fa-angle-right"></i></a>
+									<a class="dropdown-toggle" href = "./CategoryAPI?category=grain&pasta">Grains & Pasta<i class="fa fa-angle-right"></i></a>
+								</li>
+							
+								<li class="dropdown side-dropdown">
+									<a class="dropdown-toggle" href = "./CategoryAPI?category=produce">Produce<i class="fa fa-angle-right"></i></a>
 								</li>
 							</form>
 						</ul>
@@ -233,7 +233,7 @@
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
 				<li><a href="#">Products</a></li>
-				<li><a href="#">Category</a></li>
+				<li><a href="#"><c:out value ="${product.product_category}"/></a></li>
 				<li class="active"><c:out value="${product.product_name}"/></li>
 			</ul>
 		</div>
