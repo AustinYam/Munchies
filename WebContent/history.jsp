@@ -304,33 +304,16 @@
 
 					<!-- STORE -->
 				<form action ="HistoryAPI" method = "get">
-					<c:if test = "${list not empty}">
-						<c:forEach items="${list}" var = record>
+						<c:forEach items="${transactionList}" var = record>
 							<div id="store">
 								<!-- row -->
 								<div class="row">
 									<!-- Product Single -->
 									<div class="col-md-4 col-sm-6 col-xs-6">
 										<div class="product product-single">
-											<div class="product-thumb">
-												<div class="product-label">
-												</div>
-												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-												<img src="${record.picture}" alt="./foodimg/baking/baking3.jpeg">
-											</div>
 											<div class="product-body">
-												<h3 class="product-price">${record.price}</h3>
-												<div class="product-rating">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o empty"></i>
-												</div>
-												<h2 class="product-name"><a href="#">${record.name}</a></h2>
+												<h3>${record}</h3>
 												<div class="product-btns">
-													<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-													<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
 													<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 												</div>
 											</div>
@@ -341,7 +324,6 @@
 								<!-- /row -->
 							</div>
 						</c:forEach>
-					</c:if>	
 				</form>
 					<!-- /STORE -->
 

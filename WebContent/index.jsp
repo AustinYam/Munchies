@@ -90,8 +90,14 @@
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="./checkout.jsp"><i class="fa fa-check"></i> Checkout</a></li>
+							<% 
+								if (username == null){
+							%>
 								<li><a href="./login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								<li><a href="./register.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+								<%}else{%>
+								<li><a href="./TransactionAPI?transaction_id=1"><i class="fa fa-unlock-alt"></i> Login</a></li>
+								<%}%>
 							</ul>
 							<%
 								}else {
@@ -108,19 +114,6 @@
 						<!-- /Account -->	
 
 						<!-- Cart -->
-						<%
-							if(request.getSession().getAttribute("cart") != null){
-								ArrayList<Product> itemsArray = (ArrayList<Product>) request.getAttribute("cart");
-								int quantity = 0;
-								double total = 0;
-								for (Product p : itemsArray){
-									quantity++;
-									total += p.getPrice();
-								}
-								request.setAttribute("quantity", quantity);
-								request.setAttribute("total", total);
-							}
-						%>
 						<li class="header-cart dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
