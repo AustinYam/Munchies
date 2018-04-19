@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -231,9 +234,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
-				<li><a href="#">Products</a></li>
-				<li><a href="#">Category</a></li>
-				<li class="active"><c:out value="${name}"/></li>
+				<li class="active">Products</li>
 			</ul>
 		</div>
 	</div>
@@ -245,47 +246,63 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!--  Product Details -->
-				<div class="product product-details clearfix">
-					<div class="col-md-6">
-						<div id="product-main-view">
-							<div class="product-view">
-								<td><img src = "${product.imgUrl}"></td>
+				<!-- MAIN -->
+				<div id="main" class="col-md-9">
+					<!-- store top filter -->
+					<div class="store-filter clearfix">
+						<div class="pull-left">
+							<div class="row-filter">
+								<h1></h1>
 							</div>
 						</div>
-						
 					</div>
-					<div class="col-md-6">
-						<div class="product-body">
-							
-							<h2 class="product-name"><c:out value="${name}"/></h2>
-							<h3 class="product-price"><c:out value="${price}"/> </h3>
-							
-							<p><strong>Availability:</strong> In Stock</p>
-							<p><strong>Brand:</strong> E-SHOP</p>
-							<p><c:out value="${description}"/></p>
+					<!-- /store top filter -->
 
-							<div class="product-btns">
-								<div class="qty-input">
-									<span class="text-uppercase">QTY: </span>
-									<input class="input" type="number">
+					<!-- STORE -->
+						<div id="store">
+							<!-- row -->
+								<div class="row">
+									<c:forEach items = "${categoryProducts}" var = "record" varStatus = "loop">
+									<!-- Product Single -->
+									<div class="col-md-4 col-sm-6 col-xs-6">
+										<div class="product product-single">
+											<div class="product-thumb">
+												<div class="product-label">
+												</div>
+												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href = "http://localhost:8080/WebContent/ProductAPI?product_id=${record.product_id}">Quick view</a></button>
+												<img href = "http://localhost:8080/WebContent/ProductAPI?product_id=id" src="./img/fruit.jpg" alt =" Image not found">
+											</div>
+											<div class="product-body">
+												<h3 class="product-price">
+													<c:out value = "${record.product_price}"/>
+												</h3>
+												<h2 class="product-name">
+													<a href="http://localhost:8080/WebContent/ProductAPI?productid=id">
+														<c:out value = "${record.product_name}"/>
+													</a>
+												</h2>
+												<div class="product-btns">
+													<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- /Product Single -->
+									<!--	<div class="clearfix visible-md visible-lg"></div>	-->
+									</c:forEach>
 								</div>
-								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-								
-							</div>
+								<!-- /row -->
 						</div>
-					</div>
-					
-				<!-- /Product Details -->
+
+					<!-- /STORE -->
+				</div>
+				<!-- /MAIN -->
 			</div>
 			<!-- /row -->
 		</div>
 		<!-- /container -->
 	</div>
 	<!-- /section -->
-
-	<!-- section -->
-	
 
 	<!-- FOOTER -->
 	<footer id="footer" class="section section-grey">
@@ -325,6 +342,7 @@
 						<h3 class="footer-header">My Account</h3>
 						<ul class="list-links">
 							<li><a href="#">My Account</a></li>
+							<li><a href="#">My Wishlist</a></li>
 							<li><a href="#">Compare</a></li>
 							<li><a href="#">Checkout</a></li>
 							<li><a href="#">Login</a></li>
@@ -351,7 +369,16 @@
 
 				<!-- footer subscribe -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
-					
+					<div class="footer">
+						<h3 class="footer-header">Stay Connected</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+						<form>
+							<div class="form-group">
+								<input class="input" placeholder="Enter Email Address">
+							</div>
+							<button class="primary-btn">Join Newslatter</button>
+						</form>
+					</div>
 				</div>
 				<!-- /footer subscribe -->
 			</div>
