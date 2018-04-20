@@ -255,7 +255,7 @@
 				<!--  Product Details -->
 				<div class="product product-details clearfix">
 					<div class="col-md-6">
-						<div id="product-main-view">
+						<div>
 							<div class="product-view">
 								<td><img src = "${product.product_img}"></td>
 							</div>
@@ -264,21 +264,26 @@
 					</div>
 					<div class="col-md-6">
 						<div class="product-body">
-							
-							<h2 class="product-name"><c:out value="${product.product_name}"/></h2>
-							<h3 class="product-price"><c:out value="${product.product_price}"/> </h3>
-							
+							<tr>
+								<th><h3 class="product-name"><c:out value="${product.product_uniquename}"/></h3><th>
+							</tr>
+							<tr>
+								<h3 class="product-price">Price:&nbsp;<c:out value="${product.product_price}"/> </h3>
+							</tr>
 							<p><strong>Availability:</strong> In Stock</p>
-							<p><strong>Brand:</strong> E-SHOP</p>
-							<p><c:out value="${product.product_description}"/></p>
+							<p><strong>Description:&nbsp;</strong><c:out value="${product.product_description}"/></p>
 
 							<div class="product-btns">
 								<div class="qty-input">
 									<span class="text-uppercase">QTY: </span>
 									<input class="input" type="number">
 								</div>
-								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-								
+							</div>
+							<div class="product-btns">
+								<h1></h1>										
+							</div>
+							<div class="product-btns">
+								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>	
 							</div>
 						</div>
 					</div>

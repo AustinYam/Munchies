@@ -289,10 +289,8 @@
 										<tr>
 											<td class="price text-center"><strong><c:out value = "${record.transaction_id}"/></strong><br></td>
 											<td class="qty text-center">
-											<c:forEach items = "${record.getProductList()}" var = "product">
-												
+											<c:forEach items = "${record.getProductList()}" var = "product">	
 												<a href = "./ProductAPI?product"><c:out value = "${product}"/></a>
-								
 											</c:forEach>
 											</td>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>

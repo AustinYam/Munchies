@@ -276,7 +276,7 @@
 												<div class="product-label">
 												</div>
 												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href = "http://localhost:8080/WebContent/ProductAPI?product_id=${record.product_id}">Quick view</a></button>
-												<img href = "http://localhost:8080/WebContent/ProductAPI?product_id=${record.product_id}" src="./img/fruit.jpg" alt =" Image not found">
+												<img href = "http://localhost:8080/WebContent/ProductAPI?product_id=${record.product_id}" src="${record.product_img}" alt =" Image not found">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">
