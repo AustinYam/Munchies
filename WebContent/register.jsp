@@ -84,20 +84,26 @@
 								if (username == null){
 							%>
 							<a href="./login.jsp" class="text-uppercase">Login</a> / <a href="./register.jsp" class="text-uppercase">Join</a>
-							<%
-								}else {
-							%>
-							<a>Hi, <%= request.getSession().getAttribute("userid")%></a>
-							<a href = "LogoutAPI">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
-								<% }%>
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="./checkout.jsp"><i class="fa fa-check"></i> Checkout</a></li>
 								<li><a href="./login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								<li><a href="./register.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
 							</ul>
+							<%
+								}else {
+							%>
+							<a>Hi, <%= request.getSession().getAttribute("userid")%></a>
+							<a href = "LogoutAPI">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+								
+							<ul class="custom-menu">
+								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="./checkout.jsp"><i class="fa fa-check"></i> Checkout</a></li>
+								<li><a href="./TransactionAPI?username=${userid}"><i class="fa fa-book"></i> History</a></li>
+							</ul>
+							<% }%>
 						</li>
-						<!-- /Account -->
+						<!-- /Account -->	
 
 						<!-- Cart -->
 						<li class="header-cart dropdown default-dropdown">
@@ -296,35 +302,35 @@
 		          </a>
 						</div>
 						<!-- /footer logo -->
-
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
-
-						<!-- footer social -->
-						<ul class="footer-social">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-						<!-- /footer social -->
 					</div>
 				</div>
 				<!-- /footer widget -->
 
 				<!-- footer widget -->
+				<% 
+					if (username == null){
+				%>
+				<div class="col-md-3 col-sm-6 col-xs-6">
+					<div class="footer">
+						<h3 class="footer-header">My Account</h3>
+						<ul class="list-links">
+							<li><a href="./login.jsp">Login</a></li>
+							<li><a href="./register.jsp">Register</a></li>
+						</ul>
+					</div>
+				</div>
+				<%} else {%>
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
 						<h3 class="footer-header">My Account</h3>
 						<ul class="list-links">
 							<li><a href="#">My Account</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Compare</a></li>
-							<li><a href="#">Checkout</a></li>
-							<li><a href="#">Login</a></li>
+							<li><a href="./checkout.jsp">Checkout</a></li>
+							<li><a href="./TransactionAPI?username=${userid}">History</a></li>
 						</ul>
 					</div>
 				</div>
+				<%}%>
 				<!-- /footer widget -->
 
 				<div class="clearfix visible-sm visible-xs"></div>
@@ -335,28 +341,11 @@
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
 							<li><a href="#">About Us</a></li>
-							<li><a href="#">Shiping & Return</a></li>
-							<li><a href="#">Shiping Guide</a></li>
 							<li><a href="#">FAQ</a></li>
 						</ul>
 					</div>
 				</div>
 				<!-- /footer widget -->
-
-				<!-- footer subscribe -->
-				<div class="col-md-3 col-sm-6 col-xs-6">
-					<div class="footer">
-						<h3 class="footer-header">Stay Connected</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-						<form>
-							<div class="form-group">
-								<input class="input" placeholder="Enter Email Address">
-							</div>
-							<button class="primary-btn">Join Newslatter</button>
-						</form>
-					</div>
-				</div>
-				<!-- /footer subscribe -->
 			</div>
 			<!-- /row -->
 			<hr>
