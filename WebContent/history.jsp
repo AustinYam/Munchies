@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
+
 <html lang="en">
 
 <head>
@@ -265,7 +267,7 @@
 								<div class="col-md-12">
 						<div class="order-summary clearfix">
 							<div class="section-title">
-								<h3 class="title">Order Review</h3>
+								<h3 class="title">Transaction History</h3>
 							</div>
 							<c:forEach items = "${transactionList}" var = "record">
 							<table class="shopping-cart-table table">
@@ -274,16 +276,20 @@
 										<th class = "text-center">Transaction ID</th>
 										<th class="text-center">Items</th>
 										<th class="text-center">Transaction Date</th>
-										<th class="text-center"></th>
 										<th class="text-center">Total</th>
 									</tr>
 								</thead>
 								<tbody>
 										<tr>
 											<td class="price text-center"><strong><c:out value = "${record.transaction_id}"/></strong><br></td>
-											<td class="qty text-center"><p><c:out value = "${record.productList}"/></p></td>
+											<td class="qty text-center">
+											<c:forEach items = "${record.getProductList()}" var = "product">
+												
+												<a href = "./ProductAPI?product"><c:out value = "${product}"/></a>
+								
+											</c:forEach>
+											</td>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>
-											<td class="text-right"><strong class="primary-color">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></td>
 											<td class="total text-right"><strong class="primary-color">$<c:out value = "${record.totalSum}"/></strong></td>
 										</tr>
 								</tbody>

@@ -102,7 +102,7 @@
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="./checkout.jsp"><i class="fa fa-check"></i> Checkout</a></li>
-								<li><a href="./TransactionAPI?username=${userid}"><i class="fa fa-unlock-alt"></i> History</a></li>
+								<li><a href="./TransactionAPI?username=${userid}"><i class="fa fa-book"></i> History</a></li>
 							</ul>
 							<% }%>
 						</li>
@@ -232,7 +232,6 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="./index.jsp">Home</a></li>
-						<li><a href="http://localhost:8080/WebContent/ProductAPI?productid=id">Shop</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -372,27 +371,29 @@
 
 				<!-- footer widget -->
 				<% 
-								if (username == null){
-							%>
+					if (username == null){
+				%>
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
 						<h3 class="footer-header">My Account</h3>
 						<ul class="list-links">
 							<li><a href="./login.jsp">Login</a></li>
+							<li><a href="./register.jsp">Register</a></li>
 						</ul>
 					</div>
 				</div>
-								<%} else {%>
+				<%} else {%>
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
 						<h3 class="footer-header">My Account</h3>
 						<ul class="list-links">
 							<li><a href="#">My Account</a></li>
 							<li><a href="./checkout.jsp">Checkout</a></li>
+							<li><a href="./TransactionAPI?username=${userid}">History</a></li>
 						</ul>
 					</div>
 				</div>
-								<%}%>
+				<%}%>
 				<!-- /footer widget -->
 
 				<div class="clearfix visible-sm visible-xs"></div>

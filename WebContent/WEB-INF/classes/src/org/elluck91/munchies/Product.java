@@ -82,10 +82,15 @@ public class Product {
 	}
 
 	@Override
+	public String toString(){
+		return product_uniquename;
+	}
+	/*
 	public String toString() {
 		return "Product [product_uniquename=" + product_uniquename + ", product_name=" + product_name
 				+ ", product_price=" + product_price + ", product_description=" + product_description + ", product_img="
 				+ product_img + ", product_category=" + product_category + ", product_id=" + product_id + "]";
 	}
+	*/
 	
 }
