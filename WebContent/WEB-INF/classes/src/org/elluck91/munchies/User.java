@@ -13,10 +13,9 @@ import java.sql.Date;
  * @author elluck91
  */
 public class User {
-    public int ID;
     public String username;
     public String password;
     public String email;
-    public Date lastlogin;
     public String name;
+    public String transactions;
 }

@@ -30,8 +30,7 @@ public class RegisterAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -39,11 +38,9 @@ public class RegisterAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(request.getParameter("Register") != null){
-
 			DbManager db = new DbManager();
 
 			User user = new User();
@@ -51,33 +48,33 @@ public class RegisterAPI extends HttpServlet {
 			user.username= request.getParameter("username");
 			user.email = request.getParameter("email");
 			user.password = request.getParameter("pass");
-		    user.lastlogin = new Date(0);
 		    user.name = request.getParameter("name");
+		    user.transactions = "";
 			int res = db.Register(user);
 			
 			System.out.println("Server response: " + res);
 			if(res == 1)
-				response.sendRedirect("./login.jsp");
+				response.sendRedirect("./index.jsp");
 			else {
 				response.sendRedirect("./register.jsp");
-
 			}
 		}
-		
-	}
+			else {
+				response.sendRedirect("./reg.jsp");
+			}
+		}
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
-
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 

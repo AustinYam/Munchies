@@ -76,5 +76,13 @@
     <servlet-name>ProductAPI</servlet-name>
     <url-pattern>/ProductAPI</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>TransactionAPI</servlet-name>
+    <servlet-class>org.elluck91.munchies.TransactionAPI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TransactionAPI</servlet-name>
+    <url-pattern>/TransactionAPI</url-pattern>
+  </servlet-mapping>
 </web-app>
 

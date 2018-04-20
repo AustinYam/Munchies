@@ -53,6 +53,7 @@ public class TransactionAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Username: " + request.getAttribute("username"));
 		HttpSession session = request.getSession();
 		DbManager db = new DbManager();
 		
@@ -79,7 +80,7 @@ public class TransactionAPI extends HttpServlet {
 		
 		request.setAttribute("transactionList", transactionListComplete);
 		RequestDispatcher requestDispatcher; 
-		requestDispatcher = request.getRequestDispatcher("/transaction_info.jsp");
+		requestDispatcher = request.getRequestDispatcher("/history.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

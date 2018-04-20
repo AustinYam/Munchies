@@ -77,11 +77,12 @@ public class DbManager implements IRepo{
 			//con  = DriverManager.getConnection("jdbc:mysql://localhost/Students","cmpe133","cmpe133_Spring2018!");
 			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
 			System.out.println("Connected with the DB.");
-			PreparedStatement sql = con.prepareStatement("INSERT INTO Users VALUES(?,sha2(?, 256),?,?)");
+			PreparedStatement sql = con.prepareStatement("INSERT INTO Users VALUES(?,sha2(?, 256),?,?,?)");
 			sql.setString(1, user.username);
 			sql.setString(2, user.password);
 			sql.setString(3, user.email);
 			sql.setString(4, user.name);
+			sql.setString(5,  user.transactions);
 
 			sql.execute();
 			return 1;
@@ -122,12 +123,11 @@ public class DbManager implements IRepo{
 			ResultSet res = sql.executeQuery();
 			res.next();
 
-			user.ID = res.getInt(1);
-			user.username = res.getString(2);
+			user.username = res.getString(1);
+			user.password = res.getString(2);
 			user.email = res.getString(3);
-			user.password = res.getString(4);
-			user.lastlogin = res.getDate(5);
-			user.name = res.getString(6);
+			user.name = res.getString(4);
+			user.transactions = res.getString(5);
 			return user;
 
 
