@@ -12,11 +12,19 @@ public class Transaction {
 		this.transaction_id = transaction_id;
 	}
 
-	public String getProductList() {
+	public String getProductListString() {
+		return productListString;
+	}
+
+	public void setProductListString(String productListString) {
+		this.productListString = productListString;
+	}
+	
+	public ArrayList<Product> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(String productList) {
+	public void setProductList(ArrayList<Product> productList) {
 		this.productList = productList;
 	}
 
@@ -37,25 +45,29 @@ public class Transaction {
 	}
 	
 	int transaction_id;
-	String productList;
+	String productListString;
 	Date date;
 	Double totalSum;
+	ArrayList<Product> productList;
 	
 	Transaction() {
-		productList = "";
+		productListString = "";
 		date = new Date(0);
 		totalSum = 0.0;
+		productList = new ArrayList<Product>();
 	}
 	
-	Transaction(int transaction_id, String productList, Date date, Double totalSum) {
+	Transaction(int transaction_id, String productListString, Date date, Double totalSum) {
 		this.transaction_id = transaction_id;
-		this.productList = productList;
+		this.productListString = productListString;
 		this.date = date;
 		this.totalSum = totalSum;
+		productList = new ArrayList<Product>();
 	}
 	
 	public void addProduct(Product p) {
-		productList += "," + p;
+		productListString += p.getProduct_id() + ",";
+		productList.add(p);
 	}
 
 	@Override

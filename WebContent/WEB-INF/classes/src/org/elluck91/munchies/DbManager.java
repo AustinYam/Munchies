@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Eslam
+ * @author elluck91
  */
 public class DbManager implements IRepo{
 
@@ -254,7 +255,7 @@ public class DbManager implements IRepo{
 			sql.setInt(1, transaction.getTransaction_id());
 			sql.setDate(2, transaction.getDate());
 			sql.setDouble(3, transaction.getTotalSum());
-			sql.setString(4, transaction.getProductList());
+			sql.setString(4, transaction.getProductListString());
 			sql.execute();
 			
 			
@@ -277,8 +278,43 @@ public class DbManager implements IRepo{
 
 
 	public void updateUser(String username, int transaction_id) {
-		// Needs to be implemented.
 		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			//PreparedStatement sql = con.prepareStatement("SELECT transactions FROM Users where username=?");
+			PreparedStatement sql = con.prepareStatement("SELECT transactions FROM Users");
+
+			//sql.setString(1, username);
+			String transactionList = "";
+			ResultSet res = sql.executeQuery();
+			ResultSetMetaData rsmd = res.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			System.out.println("Query complete.");
+			while (res.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+			        if (i > 1) System.out.print(",  ");
+			        String columnValue = res.getString(i);
+			        transactionList += columnValue + ",";
+			        System.out.print(columnValue + " " + rsmd.getColumnName(i));
+			    }
+			    System.out.println("");
+				
+			}
+			transactionList += transaction_id + ",";
+			sql = con.prepareStatement("UPDATE users SET transactions=? WHERE username=?");
+			sql.setString(1, transactionList);
+			sql.setString(2, username);
+			
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 

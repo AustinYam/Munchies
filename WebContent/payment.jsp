@@ -251,7 +251,7 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<form id="checkout-form" class="clearfix" action = "./BillingAPI">
+				<form id="checkout-form" class="clearfix" action = "./BillingAPI" onsubmit = "return checkforblank()">
 					<div class="col-md-6">
 						<div class="billing-details">
 							<p>Already a customer ? <a href="#">Login</a></p>
@@ -266,18 +266,19 @@
 								</tr>
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="card number" placeholder="Card Number">
+								<input id = "card number" class="input" type="text" name="card number" placeholder="Card Number">
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="security code" placeholder="Security Code">
+								<input id = "cardholder name" class="input" type="text" name="cardholder name" placeholder="Cardholder Name">
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="cardholder name" placeholder="Cardholder Name">
+								<input id = "expiry date" class="input" type="text" name="expiry date" placeholder="Expiration date (MM/YY)">
 							</div>
 							<div class="form-group">
-								<input class="input" type="text" name="expiry date" placeholder="Expiry Date MM/YY">
+								<input id = "security date" class="input" type="text" name="security code" placeholder="Security Code">
 							</div>
 							<div class="form-group">
+							
 							</div>
 						</div>
 					</div>
@@ -310,7 +311,7 @@
 										<td class="price text-center"><strong>price</strong><br></td>
 										<td class="qty text-center"><input class="input" type="number" value="1"></td>
 										<td class="total text-center"><strong class="primary-color">$32.50</strong></td>
-										<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+										<td class="text-right"><button class="main-btn icon-btn" type = "submit"><i class="fa fa-close"></i></button></td>
 									</tr>
 								</tbody>
 								<tfoot>
@@ -425,6 +426,31 @@
 		<!-- /container -->
 	</footer>
 	<!-- /FOOTER -->
+	
+	<script type = "text/javascript">
+	function checkforblank(){
+		
+		var errormessage = "";
+	if(document.getElementById('card number').value == ""){
+			errormessage += "Card number is required \n";
+		}
+		if(document.getElementById('cardholder name').value == "" || document.getElementById('email').value.includes("@")){
+			errormessage += "Cardholder name is required \n";
+		}
+		if(document.getElementById('expiry date').value == ""){
+			errormessage += "Expiry date is required \n";
+		}
+		if(document.getElementById('security date').value == ""){
+			errormessage += "Security is required \n";
+		}
+		if(errormessage != ""){
+			alert(errormessage);
+			return false;
+		}
+	
+			
+	}
+	</script>
 
 	<!-- jQuery Plugins -->
 	<script src="js/jquery.min.js"></script>

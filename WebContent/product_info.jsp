@@ -257,7 +257,7 @@
 					<div class="col-md-6">
 						<div>
 							<div class="product-view">
-								<td><img src = "${product.product_img}"></td>
+								<td><img class = "productimage" src = "${product.product_img}"></td>
 							</div>
 						</div>
 						
@@ -268,7 +268,7 @@
 								<th><h3 class="product-name"><c:out value="${product.product_uniquename}"/></h3><th>
 							</tr>
 							<tr>
-								<h3 class="product-price">Price:&nbsp;<c:out value="${product.product_price}"/> </h3>
+								<h3 class="product-price">Price:&nbsp;$<c:out value="${product.product_price}"/> </h3>
 							</tr>
 							<p><strong>Availability:</strong> In Stock</p>
 							<p><strong>Description:&nbsp;</strong><c:out value="${product.product_description}"/></p>
@@ -276,7 +276,7 @@
 							<div class="product-btns">
 								<div class="qty-input">
 									<span class="text-uppercase">QTY: </span>
-									<input class="input" type="number">
+									<input class="input" type="number" value = "1">
 								</div>
 							</div>
 							<div class="product-btns">

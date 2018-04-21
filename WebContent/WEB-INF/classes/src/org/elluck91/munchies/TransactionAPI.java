@@ -53,7 +53,6 @@ public class TransactionAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Username: " + request.getAttribute("username"));
 		HttpSession session = request.getSession();
 		DbManager db = new DbManager();
 		
@@ -80,7 +79,7 @@ public class TransactionAPI extends HttpServlet {
 		
 		request.setAttribute("transactionList", transactionListComplete);
 		RequestDispatcher requestDispatcher; 
-		requestDispatcher = request.getRequestDispatcher("/history.jsp");
+		requestDispatcher = request.getRequestDispatcher("/transaction_info.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -88,17 +87,20 @@ public class TransactionAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Here");
 		DbManager db = new DbManager();
-		String username = (String) request.getAttribute("username");
-		int transaction_id = (int) request.getAttribute("transaction_id");
-		String productList = (String) request.getAttribute("product_list");
-		Date date = (Date) request.getAttribute("date");
-		Double totalSum = (Double) request.getAttribute("totalSum");
+		String username = (String) request.getSession().getAttribute("username");
+		int transaction_id = (int) request.getSession().getAttribute("transaction_id");
+		String productList = (String) request.getSession().getAttribute("product_list");
+		Date date = (Date) request.getSession().getAttribute("date");
+		Double totalSum = (Double) request.getSession().getAttribute("totalSum");
 		
+		System.out.println("String: " + username + "\ntransaction_id: " + transaction_id + "\nproductList: " + productList + "\ndate: " + date + "\ntotalSum: " + totalSum);
 		Transaction transaction = new Transaction(transaction_id, productList, date, totalSum);
-		transaction.setProductList(productList);
+		transaction.setProductListString(productList);
 		
 		db.insertTransaction(transaction);
+		System.out.println("Updating user");
 		db.updateUser(username, transaction_id);
 	}
 

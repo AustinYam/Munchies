@@ -295,7 +295,7 @@
 			<div class="row">
 				<!-- banner -->
 				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1" href="#">
+					<a class="banner banner-1" href="./CategoryAPI?category=produce">
 						<img src="./img/fruit.jpg" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color font-weak">Fresh Produce</h2>
@@ -306,7 +306,7 @@
 
 				<!-- banner -->
 				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1 " href="#">
+					<a class="banner banner-1 " href="./CategoryAPI?category=beverages">
 						<img src="./img/wine.jpg" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color font-weak">New Collection</h2>
@@ -317,7 +317,7 @@
 
 				<!-- banner -->
 				<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-					<a class="banner banner-1" href="#">
+					<a class="banner banner-1" href="./CategoryAPI?category=grain">
 						<img src="./img/Heinz.png" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color font-weak">Discounted Prices</h2>
