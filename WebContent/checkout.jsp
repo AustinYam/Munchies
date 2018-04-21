@@ -224,7 +224,6 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="./index.jsp">Home</a></li>
-						<li><a href="#">Shop</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -286,17 +285,6 @@
 							</div>
 							<div class="form-group">
 								<input id = "tel" class="input" type="tel" name="tel" placeholder="Telephone">
-							</div>
-							<div class="form-group">
-								<div class="input-checkbox">
-									<input type="checkbox" id="register">
-									<label class="font-weak" for="register">Create Account?</label>
-									<div class="caption">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
-											<p>
-												<input class="input" type="password" name="password" placeholder="Enter Your Password">
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>

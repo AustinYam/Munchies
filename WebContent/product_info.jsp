@@ -222,7 +222,6 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="./index.jsp">Home</a></li>
-						<li><a href="#">Shop</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
@@ -237,9 +236,8 @@
 	<div id="breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Products</a></li>
-				<li><a href="#"><c:out value ="${product.product_category}"/></a></li>
+				<li><a href="./index.jsp">Home</a></li>
+				<li><a href="./CategoryAPI?category=${product.product_category}"><c:out value ="${product.product_category}"/></a></li>
 				<li class="active"><c:out value="${product.product_name}"/></li>
 			</ul>
 		</div>
