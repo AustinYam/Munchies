@@ -275,19 +275,19 @@
 											<div class="product-thumb">
 												<div class="product-label">
 												</div>
-												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href = "./ProductAPI?product_id=${record.product_id}">Quick view</a></button>
+												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href = "./ProductAPI?product_id=${record.product_id}">View</a></button>
 												<img href = "./ProductAPI?product_id=${record.product_id}" src="${record.product_img}" alt =" Image not found">
 											</div>
 											<div class="product-body">
-												<h3 class="product-price">
-													<c:out value = "${record.product_price}"/>
-												</h3>
 												<h2 class="product-name">
 													<a href="./ProductAPI?product_id=${record.product_id}">
-														<c:out value = "${record.product_uniquename}"/>
+														<h3><c:out value = "${record.product_uniquename}"/></h3>
 													</a>
 												</h2>
-												<div class="product-btns">
+												<h4 class="product-price">
+													<c:out value = "${record.product_price}"/>
+												</h4>
+												<div class="product-btn|s">
 													<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 												</div>
 											</div>
