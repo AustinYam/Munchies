@@ -315,7 +315,7 @@
 								<h4 class="title">Shiping Methods</h4>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-1" value = "Free Shipping" checked>
+								<input type="radio" name="shipping" id="shipping-1" checked>
 								<label for="shipping-1">Free Shiping -  $0.00</label>
 								<div class="caption">
 									<p>Guaranteed within 3-5 business days
@@ -323,7 +323,7 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-2" value = "Standard Shipping">
+								<input type="radio" name="shipping" id="shipping-2">
 								<label for="shipping-2">Standard - $4.00</label>
 								<div class="caption">
 									<p>Guaranteed within 1-2 business days
@@ -352,8 +352,9 @@
 									<%
 										if(session.getAttribute("cart") != null) {
 									%>
-									<c:forEach items="${cart.getProductList()}" var="product">
+									<c:forEach items="${list}" var="item">
 										<tr>
+<<<<<<< HEAD
 											<td class="thumb"><img src="${product.getProduct_img()}" alt=""></td>
 											<td class="details">
 												<a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a>
@@ -361,6 +362,19 @@
 											<td class="price text-center"><strong><c:out value = "${product.getProduct_price()}"/></strong><br></td>
 											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${product.getProduct_price()*product.getProduct_quantity()}"/></strong></td>
+=======
+											<td class="thumb"><img src="${item.img}" alt=""></td>
+											<td class="details">
+												<a href="#">${item.name}</a>
+												<ul>
+													<li><span>${item.description}</span></li>
+													
+												</ul>
+											</td>
+											<td class="price text-center"><strong>${item.price}</strong><br></td>
+											<td class="qty text-center"><input class="input" type="number">${item.quantity}</td>
+											<td class="total text-center"><strong class="primary-color">${item.price*item.quantity}</strong></td>
+>>>>>>> e83a50174d6567da9340196973641f47137e4916
 											<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
 										</tr>
 										</tbody>
@@ -369,17 +383,17 @@
 											<tr>
 												<th class="empty" colspan="3"></th>
 												<th>SUBTOTAL</th>
-												<th colspan="2" class="sub-total">$<c:out value = "${total}"/></th>
+												<th colspan="2" class="sub-total">$ <%= request.getSession().getAttribute("total")%></th>
 											</tr>
 											<tr>
 												<th class="empty" colspan="3"></th>
 												<th>SHIPING</th>
-												<td colspan="2"><c:out value = "${param.shipping}"/></td>
+												<td colspan="2">Free Shipping</td>
 											</tr>
 											<tr>
 												<th class="empty" colspan="3"></th>
 												<th>TOTAL</th>
-												<th colspan="2" class="total">$<c:out value = "${total}"/></th>
+												<th colspan="2" class="total">$ <%= request.getSession().getAttribute("total")%></th>
 											</tr>
 										</tfoot>
 									<%
