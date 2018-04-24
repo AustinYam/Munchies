@@ -285,8 +285,12 @@
 					<!-- STORE -->
 						<div id="store">
 							<!-- row -->
-								<div class="row">
+								<div class="row ">
+								<%
+								int i = 0;
+								%>
 									<c:forEach items = "${categoryProducts}" var = "record" varStatus = "loop">
+									
 									<!-- Product Single -->
 									<div class="col-md-4 col-sm-6 col-xs-6">
 										<div class="product product-single">
@@ -303,7 +307,7 @@
 													</a>
 												</h2>
 												<h4 class="product-price">
-													<c:out value = "${record.product_price}"/>
+													$<c:out value = "${record.product_price}"/>
 												</h4>
 												<div class="product-btn|s">
 													<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
@@ -311,6 +315,13 @@
 											</div>
 										</div>
 									</div>
+									<% i++;
+									if ((i%3) == 0)
+									{
+									%>
+									</div><div class="row">
+									<%}%>
+									
 									<!-- /Product Single -->
 									<!--	<div class="clearfix visible-md visible-lg"></div>	-->
 									</c:forEach>
