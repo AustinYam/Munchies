@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product"%>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
+
 <html lang="en">
 
 <head>
@@ -40,6 +41,11 @@
 </head>
 
 <body>
+	<c:forEach items = "${transactionList}" var = "transactions">
+		<c:forEach items = "${transactions.productList}" var = "products">
+			<c:out value = "${products.product_id}"/>
+		</c:forEach>
+	</c:forEach>
 	<!-- HEADER -->
 	<header>
 		<!-- header -->
@@ -236,8 +242,7 @@
 								</li>
 						</ul>
 					</div>
-				</div>	
-			</div>
+				</div>
 				<!-- /category nav -->
 
 				<!-- menu nav -->
@@ -249,56 +254,22 @@
 				</div>
 				<!-- menu nav -->
 			</div>
+		</div>
 		<!-- /container -->
 	</div>
 	<!-- /NAVIGATION -->
 
-	<!-- HOME -->
-	<div id="home">
-		<!-- container -->
+
+	<!-- BREADCRUMB -->
+	<div id="breadcrumb">
 		<div class="container">
-			<!-- home wrap -->
-			<div class="home-wrap">
-				<!-- home slick -->
-				<div id="home-slick">
-					<!-- banner -->
-					<div class="banner banner-3" height = "400">
-						<img src="./img/foodbanner1.jpeg" alt="" >
-						<div class="banner-caption text-center">
-							<h1 class = "white-color">Sale</h1>
-							<h1 class="white-color font-weak">Up to 10% OFF</h1>
-							<button class="primary-btn">Shop Now</button>
-						</div>
-					</div>
-					<!-- /banner -->
-
-					<!-- banner -->
-					<div class="banner banner-3">
-						<img src="./img/foodbanner2.jpg" alt="">
-						<div class="banner-caption text-center">
-							<h1 class="white-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-							<button class="primary-btn">Shop Now</button>
-						</div>
-					</div>
-					<!-- /banner -->
-
-					<!-- banner -->
-					<div class="banner banner-3">
-						<img src="./img/foodbanner3.jpg" alt="">
-						<div class="banner-caption text-center">
-							<h1 class="white-color">New Product <span>Collection</span></h1>
-							<button class="primary-btn">Shop Now</button>
-						</div>
-					</div>
-					<!-- /banner -->
-				</div>
-				<!-- /home slick -->
-			</div>
-			<!-- /home wrap -->
+			<ul class="breadcrumb">
+				<li><a href="#">Home</a></li>
+				<li class="active">History</li>
+			</ul>
 		</div>
-		<!-- /container -->
 	</div>
-	<!-- /HOME -->
+	<!-- /BREADCRUMB -->
 
 	<!-- section -->
 	<div class="section">
@@ -306,39 +277,71 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!-- banner -->
-				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1" href="./CategoryAPI?category=produce">
-						<img src="./img/fruit.jpg" alt="">
-						<div class="banner-caption text-center">
-							<h1 class="white-color font-weak">Fresh Produce</h2>
-						</div>
-					</a>
-				</div>
-				<!-- /banner -->
+				<!-- ASIDE -->
+				
+				<!-- /ASIDE -->
 
-				<!-- banner -->
-				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1 " href="./CategoryAPI?category=beverages">
-						<img src="./img/wine.jpg" alt="">
-						<div class="banner-caption text-center">
-							<h1 class="white-color font-weak">New Collection</h2>
+				<!-- MAIN -->
+				<div id="main" class="col-md-9">
+					<!-- store top filter -->
+					<div class="store-filter clearfix">
+						<div class="pull-left">
 						</div>
-					</a>
-				</div>
-				<!-- /banner -->
-
-				<!-- banner -->
-				<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-					<a class="banner banner-1" href="./CategoryAPI?category=grain">
-						<img src="./img/Heinz.png" alt="">
-						<div class="banner-caption text-center">
-							<h1 class="white-color font-weak">Discounted Prices</h2>
+						<div class="pull-right">
 						</div>
-					</a>
-				</div>
-				<!-- /banner -->
+					</div>
+					<!-- /store top filter -->
 
+					<!-- STORE -->
+								<div class="col-md-12">
+						<div class="order-summary clearfix">
+							<div class="section-title">
+								<h3 class="title">Search Results</h3>
+							</div>
+							<c:forEach items = "${transactionList}" var = "record">
+							<table class="shopping-cart-table table">
+								<thead>
+									<tr>
+										<th class = "text-center">Transaction ID</th>
+										<th class="text-center">Items</th>
+										<th class="text-center">Transaction Date</th>
+										<th class="text-center">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td class="price text-center"><strong><c:out value = "${record.transaction_id}"/></strong><br></td>
+											<td class="qty text-center">
+											<c:forEach items = "${record.getProductList()}" var = "product">	
+												<a href = "./ProductAPI?product_id=${product.product_id}"><c:out value = "${product.getProduct_uniquename()}"/></a>
+											</c:forEach>
+											</td>
+											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>
+											<td class="total text-center"><strong class="primary-color">$<c:out value = "${record.totalSum}"/></strong></td>
+										</tr>
+								</tbody>
+							</table>
+							</c:forEach>
+							<div class="pull-right">
+							<!--	<button class="primary-btn">Checkout</button>-->
+							</div>
+						</div>
+
+					</div>
+					<!-- /STORE -->
+
+					<!-- store bottom filter -->
+					<div class="store-filter clearfix">
+						<div class="pull-left">
+
+						</div>
+						<div class="pull-right">
+							
+						</div>
+					</div>
+					<!-- /store bottom filter -->
+				</div>
+				<!-- /MAIN -->
 			</div>
 			<!-- /row -->
 		</div>
@@ -346,22 +349,6 @@
 	</div>
 	<!-- /section -->
 
-	<!-- section -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<!-- section-title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h2 class="title"></h2>
-						<div class="pull-right">
-							<div class="product-slick-dots-1 custom-dots"></div>
-						</div>
-					</div>
-				</div>
-				<!-- /section-title -->
 	<!-- FOOTER -->
 	<footer id="footer" class="section section-grey">
 		<!-- container -->
@@ -442,16 +429,7 @@
 		<!-- /container -->
 	</footer>
 	<!-- /FOOTER -->
-	
-	<script type = "text/javascript">
-		function submitMe() 
-		{ 
-			document.MyForm.action="http://www.ugs.com/"; 
-			document.MyForm.target="targetName"; 
-			document.MyForm.submit(); 
-			return; 
-		}
-	</script>
+
 	<!-- jQuery Plugins -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
