@@ -314,13 +314,10 @@
 											<td class="qty text-center">
 											<c:forEach items = "${record.getProductList()}" var = "product">	
 												<a href = "./ProductAPI?product_id=${product.product_id}"><c:out value = "${product.getProduct_uniquename()}"/></a>
-												<a href = "./CartAPI?product_id=${product.getProduct_id()}&count=1">Add to Cart</a>
-												<br/>				
 											</c:forEach>
 											</td>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>
 											<td class="total text-center"><strong class="primary-color">$<c:out value = "${record.totalSum}"/></strong></td>
-											
 										</tr>
 								</tbody>
 							</table>

@@ -389,6 +389,7 @@ VALIDATE
     visibility: visible;
     opacity: 1;
   }
+  
 }
 
 /*----------------------------*\
@@ -1091,6 +1092,7 @@ VALIDATE
 \*----------------------------*/
 
 .product.product-single {
+  vertical-align: text-bottom;
   margin-top: 15px;
   margin-bottom: 15px;
   -webkit-transition: 0.3s all;
@@ -1106,6 +1108,12 @@ VALIDATE
 }
 
 .product.product-single .product-thumb {
+	 width: 250px;
+  height: 250px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: center center;
+  margin-bottom: 15px;
   position: relative;
   margin-bottom: 15px;
 }
@@ -1154,7 +1162,7 @@ VALIDATE
 .product.product-single .product-label {
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 0;
 }
 
 .product.product-single .product-label>span {
@@ -1187,7 +1195,8 @@ VALIDATE
 }
 
 .product.product-single .product-btns {
-  margin-top: 20px;
+  margin-bottom: 20px;
+  
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 0.3s all;
