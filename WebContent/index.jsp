@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product, org.elluck91.munchies.Cart" %>
 <html lang="en">
 
 <head>
@@ -120,6 +120,11 @@
 									<% 
 										}else {
 									%>
+									<!--add quanitity iterator-->
+									<c:set var = "quantity" value = "0"/>
+									<c:forEach items = "${cart.getProductList()}" var = "record">
+										<c:set var = "quantity" value = "${count+1}"/>
+									</c:forEach>
 									<span class="qty"><c:out value = "${quantity}"/></span>
 									<%} %>
 								</div>
@@ -132,7 +137,11 @@
 									<%
 									}else {
 									%>
-									<span>$ <c:out value = "${total}"/></span>
+									<c:set var = "total" value = "0.00"/>
+									<c:forEach items = "${cart.getProductList()}" var = "record">
+										<c:set var = "total" value = "${count + record.getProduct_price()}"/>
+									</c:forEach>
+									<span>$<c:out value = "${total}"/></span>
 									<%}%>
 							</a>
 							<div class="custom-menu">
@@ -141,16 +150,20 @@
 										<%
 											if (request.getSession().getAttribute("cart") != null){
 										%>
-										<c:forEach items = "${cart}" var = "product">
+										<c:forEach items = "${cart.getProductList()}" var = "product">
 											<div class="product product-widget">
 												<div class="product-thumb">
-													<img src= "${product.imgUrl}" alt="nope">
+													<img src= "${product.getProduct_img()}" alt="nope">
 												</div>
 												<div class="product-body">
-													<h3 class="product-price">price: $<span class="qty"><c:out value = "${product.price}"/></span></h3>
-													<h2 class="product-name"><a href="#"><c:out value = "${product.name}"/></a></h2>
+													<h3 class="product-price"><a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
+													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
 												</div>
-												<button class="cancel-btn"><i class="fa fa-trash"></i></button>
+												<form action=CartAPI method = "post">
+													<input type="hidden" value="delete" name="action">
+													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
+												</form>
 											</div>
 										</c:forEach>
 										<%}else{%>

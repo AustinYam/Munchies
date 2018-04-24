@@ -64,7 +64,7 @@ public class TransactionAPI extends HttpServlet {
 			transactionListComplete = new ArrayList<Transaction>();
 			Transaction tempTransaction;
 			for (String transaction : transactionList) {
-				
+				System.out.println("Transaction: " + transaction);
 				tempTransaction = db.getTransactionDetails(transaction);
 				transactionListComplete.add(tempTransaction);
 			}

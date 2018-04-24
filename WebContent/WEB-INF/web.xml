@@ -84,5 +84,13 @@
     <servlet-name>TransactionAPI</servlet-name>
     <url-pattern>/TransactionAPI</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CartAPI</servlet-name>
+    <servlet-class>org.elluck91.munchies.CartAPI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartAPI</servlet-name>
+    <url-pattern>/CartAPI</url-pattern>
+  </servlet-mapping>
 </web-app>
 

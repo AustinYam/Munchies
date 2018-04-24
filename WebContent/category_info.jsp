@@ -119,7 +119,12 @@
 									<% 
 										}else {
 									%>
-									<span class="qty"><%= request.getSession().getAttribute("quantity")%></span>
+									<!--add quanitity iterator-->
+									<c:set var = "quantity" value = "0"/>
+									<c:forEach items = "${cart.getProductList()}" var = "record">
+										<c:set var = "quantity" value = "${count+1}"/>
+									</c:forEach>
+									<span class="qty"><c:out value = "${quantity}"/></span>
 									<%} %>
 								</div>
 								<strong class="text-uppercase">My Cart:</strong>
@@ -131,36 +136,51 @@
 									<%
 									}else {
 									%>
-									<span>$ <%= request.getSession().getAttribute("total")%></span>
+									<c:set var = "total" value = "0.00"/>
+									<c:forEach items = "${cart.getProductList()}" var = "record">
+										<c:set var = "total" value = "${count + record.getProduct_price()}"/>
+									</c:forEach>
+									<span>$<c:out value = "${total}"/></span>
 									<%}%>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
+										<%
+											if (request.getSession().getAttribute("cart") != null){
+										%>
+										<c:forEach items = "${cart.getProductList()}" var = "product">
+											<div class="product product-widget">
+												<div class="product-thumb">
+													<img src= "${product.getProduct_img()}" alt="nope">
+												</div>
+												<div class="product-body">
+													<h3 class="product-price"><a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
+													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
+												</div>
+												<form action=CartAPI method = "post">
+													<input type="hidden" value="delete" name="action">
+													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
+												</form>
+											</div>
+										</c:forEach>
+										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
 												<img src="./img/thumb-product01.jpg" alt="">
 											</div>
 											<div class="product-body">
-												<h3 class="product-price"># <span class="qty">#</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+												<h3 class="product-price"><span class="qty"></span></h3>
+												<h2 class="product-name"><a href="#">Cart is Empty</a></h2>
 											</div>
 											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
 										</div>
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">#<span class="qty">#</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
+										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
 										<button class="main-btn">View Cart</button>
-										<button class="primary-btn" href = "checkout.jsp">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
 							</div>
@@ -213,7 +233,6 @@
 								<li class="dropdown side-dropdown">
 									<a class="dropdown-toggle" href = "./CategoryAPI?category=produce">Produce<i class="fa fa-angle-right"></i></a>
 								</li>
-							</form>
 						</ul>
 					</div>
 				</div>

@@ -282,29 +282,23 @@ public class DbManager implements IRepo{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
-			//PreparedStatement sql = con.prepareStatement("SELECT transactions FROM Users where username=?");
-			PreparedStatement sql = con.prepareStatement("SELECT transactions FROM Users");
+			PreparedStatement sql = con.prepareStatement("SELECT transactions FROM Users where username=?");
 
-			//sql.setString(1, username);
+			sql.setString(1, username);
 			String transactionList = "";
 			ResultSet res = sql.executeQuery();
-			ResultSetMetaData rsmd = res.getMetaData();
-			int columnsNumber = rsmd.getColumnCount();
+			
 			System.out.println("Query complete.");
 			while (res.next()) {
-				for (int i = 1; i <= columnsNumber; i++) {
-			        if (i > 1) System.out.print(",  ");
-			        String columnValue = res.getString(i);
-			        transactionList += columnValue + ",";
-			        System.out.print(columnValue + " " + rsmd.getColumnName(i));
-			    }
-			    System.out.println("");
+			    transactionList += res.getString("transactions");
 				
 			}
 			transactionList += transaction_id + ",";
 			sql = con.prepareStatement("UPDATE users SET transactions=? WHERE username=?");
 			sql.setString(1, transactionList);
 			sql.setString(2, username);
+			
+			sql.execute();
 			
 			con.close();
 		} catch (ClassNotFoundException e) {
@@ -319,6 +313,7 @@ public class DbManager implements IRepo{
 
 
 	public ArrayList<Product> getCategoryProducts(String category) {
+		System.out.println("Category: " + category);
 		ArrayList<Product> productList = new ArrayList<Product>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -327,7 +322,7 @@ public class DbManager implements IRepo{
 			sql.setString(1, category);
 
 			ResultSet res = sql.executeQuery();
-			
+			System.out.println("Query complete.");
 			Product product;
 			while (res.next()) {
 				System.out.println("Found a product");
@@ -350,6 +345,41 @@ public class DbManager implements IRepo{
 		System.out.println(productList.toString());
 		return productList;
 	}
+	
+	public ArrayList<Product> productSearch(String productName) {
+		//word search 
+		ArrayList<Product> searchedProducts = new ArrayList<Product>();
+		Product product = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM Product where product_name=?");
+			sql.setString(1, productName);
+
+			ResultSet res = sql.executeQuery();
+			
+			while (res.next()) {
+				System.out.println("Found products");
+				product = new Product(res.getString("product_uniquename"), res.getString("product_name"),
+						res.getDouble("product_price"), res.getString("product_description"),
+						res.getString("product_img"), res.getString("product_category"), res.getInt("product_id"));
+				searchedProducts.add(product);
+				
+			}
+			
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(searchedProducts.toString());
+		return searchedProducts;
+	}
+
 
 /*
 	@Override

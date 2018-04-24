@@ -8,8 +8,17 @@ public class Product {
 	String product_img;
 	String product_category;
 	int product_id;
+	int product_quantity;
 	
-	Product() {
+	public int getProduct_quantity() {
+		return product_quantity;
+	}
+
+	public void setProduct_quantity(int product_quantity) {
+		this.product_quantity = product_quantity;
+	}
+
+	public Product() {
 		
 	}
 
@@ -23,6 +32,7 @@ public class Product {
 		this.product_img = product_img;
 		this.product_category = product_category;
 		this.product_id = product_id;
+		
 	}
 
 	public String getProduct_uniquename() {
@@ -82,15 +92,12 @@ public class Product {
 	}
 
 	@Override
-	public String toString(){
-		return product_uniquename;
-	}
-	/*
 	public String toString() {
 		return "Product [product_uniquename=" + product_uniquename + ", product_name=" + product_name
 				+ ", product_price=" + product_price + ", product_description=" + product_description + ", product_img="
-				+ product_img + ", product_category=" + product_category + ", product_id=" + product_id + "]";
+				+ product_img + ", product_category=" + product_category + ", product_id=" + product_id
+				+ ", product_quantity=" + product_quantity + "]";
 	}
-	*/
+
 	
 }
