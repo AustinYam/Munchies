@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product"%>
 <html lang="en">
 
 <head>
@@ -317,26 +319,51 @@
 									</tr>
 								</thead>
 								<tbody>
+									<%
+										if(session.getAttribute("cart") != null) {
+									%>
+									<c:forEach items="${cart.getProductList()}" var="product">
+										<tr>
+											<td class="thumb"><img src="${product.getProduct_img()}" alt=""></td>
+											<td class="details">
+												<a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a>
+											</td>
+											<td class="price text-center"><strong><c:out value = "${product.getProduct_price()}"/></strong><br></td>
+											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
+											<td class="total text-center"><strong class="primary-color"><c:out value = "${product.getProduct_price()*product.getProduct_quantity()}"/></strong></td>
+											<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+										</tr>
+										</tbody>
+									</c:forEach>
+										<tfoot>
+											<tr>
+												<th class="empty" colspan="3"></th>
+												<th>SUBTOTAL</th>
+												<th colspan="2" class="sub-total">$<c:out value = "${total}"/></th>
+											</tr>
+											<tr>
+												<th class="empty" colspan="3"></th>
+												<th>SHIPING</th>
+												<td colspan="2"><c:out value = "${param.shipping}"/></td>
+											</tr>
+											<tr>
+												<th class="empty" colspan="3"></th>
+												<th>TOTAL</th>
+												<th colspan="2" class="total">$<c:out value = "${total}"/></th>
+											</tr>
+										</tfoot>
+									<%
+										}else{
+									%>
 									<tr>
-										<td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
-										<td class="details">
-											<a href="#">Product Name Goes Here</a>
-											<ul>
-												<li><span>Description</span></li>
-												
-											</ul>
-										</td>
-										<td class="price text-center"><strong>price</strong><br></td>
-										<td class="qty text-center"><input class="input" type="number" value="1"></td>
-										<td class="total text-center"><strong class="primary-color">$32.50</strong></td>
-										<td class="text-right"><button class="main-btn icon-btn" type = "submit"><i class="fa fa-close"></i></button></td>
+										<h2>Empty Cart</h2>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>SUBTOTAL</th>
-										<th colspan="2" class="sub-total">$97.50</th>
+										<th colspan="2" class="sub-total">$0.00</th>
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
@@ -346,9 +373,10 @@
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>TOTAL</th>
-										<th colspan="2" class="total">$97.50</th>
+										<th colspan="2" class="total">$0.00</th>
 									</tr>
 								</tfoot>
+								<%}%>
 							</table>
 							<div class="pull-right">
 								<button class="primary-btn">Place Order</button>

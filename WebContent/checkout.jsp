@@ -354,17 +354,13 @@
 									%>
 									<c:forEach items="${cart.getProductList()}" var="product">
 										<tr>
-											<td class="thumb"><img src="${product.getProduct_img}" alt=""></td>
+											<td class="thumb"><img src="${product.getProduct_img()}" alt=""></td>
 											<td class="details">
-												<a href="#">${product.getProduct_uniquename()}</a>
-												<ul>
-													<li><span>${product.getProduct_description()}</span></li>
-													
-												</ul>
+												<a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a>
 											</td>
-											<td class="price text-center"><strong>${product.getProduct_price()}</strong><br></td>
-											<td class="qty text-center"><input class="input" type="number">${product.getProduct_quantity()}</td>
-											<td class="total text-center"><strong class="primary-color">${product.getProduct_price()*product.getProduct_quantity()}</strong></td>
+											<td class="price text-center"><strong><c:out value = "${product.getProduct_price()}"/></strong><br></td>
+											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
+											<td class="total text-center"><strong class="primary-color"><c:out value = "${product.getProduct_price()*product.getProduct_quantity()}"/></strong></td>
 											<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
 										</tr>
 										</tbody>
