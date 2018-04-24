@@ -313,7 +313,7 @@
 											<td class="price text-center"><strong><c:out value = "${record.transaction_id}"/></strong><br></td>
 											<td class="qty text-center">
 											<c:forEach items = "${record.getProductList()}" var = "product">	
-												<a href = "./ProductAPI?product_id=${product.product_id}"><c:out value = "${product}"/></a>
+												<a href = "./ProductAPI?product_id=${product.product_id}"><c:out value = "${product.getProduct_uniquename()}"/></a>
 											</c:forEach>
 											</td>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>
