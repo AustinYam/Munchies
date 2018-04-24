@@ -285,12 +285,19 @@
 					<!-- STORE -->
 						<div id="store">
 							<!-- row -->
+<<<<<<< HEAD
 								<div class="row ">
 								<%
 								int i = 0;
 								%>
 									<c:forEach items = "${categoryProducts}" var = "record" varStatus = "loop">
 									
+=======
+								<div class="row">
+									<c:set var = "counter" value = "0"/>
+									<c:forEach items = "${categoryProducts}" var = "record">
+									<c:set var = "counter" value = "${counter+1}"/>
+>>>>>>> e31fb791cbc071b9db209c184646d226e25bc3d7
 									<!-- Product Single -->
 									<div class="col-md-4 col-sm-6 col-xs-6">
 										<div class="product product-single">
@@ -309,12 +316,17 @@
 												<h4 class="product-price">
 													$<c:out value = "${record.product_price}"/>
 												</h4>
+											<form action = "CartAPI" method = "post">
+												<input type = "hidden" name = "product_id" value = "${record.product_id}">
+												<input name = "count" class="input" type="hidden" value = "1">
 												<div class="product-btn|s">
-													<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+													<button name = "Add" class="primary-btn add-to-cart" type = "submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 												</div>
+											</form>
 											</div>
 										</div>
 									</div>
+<<<<<<< HEAD
 									<% i++;
 									if ((i%3) == 0)
 									{
@@ -322,8 +334,12 @@
 									</div><div class="row">
 									<%}%>
 									
+=======
+									<c:if test ="${counter % 3 == 0}">
+										<div class="clearfix visible-md visible-lg"></div>
+									</c:if>
+>>>>>>> e31fb791cbc071b9db209c184646d226e25bc3d7
 									<!-- /Product Single -->
-									<!--	<div class="clearfix visible-md visible-lg"></div>	-->
 									</c:forEach>
 								</div>
 								<!-- /row -->
