@@ -30,25 +30,17 @@ public class ProductSearchAPI extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ArrayList<Product> product = null;
+		DbManager db = new DbManager();
 		
-		String searchTerm;
-		
-		if ((searchTerm = request.getParameter("product_name")) != null) {
-			System.out.println("searching for products");
-			ArrayList<Product> products = new ArrayList<Product>();
-			DbManager db = new DbManager();
-			
-			products = db.productSearch(searchTerm);
-			
-			request.setAttribute("searchedProducts", products);
-			RequestDispatcher requestDispatcher; 
-			requestDispatcher = request.getRequestDispatcher("/productSearch_info.jsp");
-			requestDispatcher.forward(request, response);
+		if(request.getParameter("product_name") != null) {
+			product = db.productSearch(request.getParameter("product_name"));
 		}
 		
-		
-		
-		
+		request.setAttribute("categoryProducts", product);
+		RequestDispatcher requestDispatcher; 
+		requestDispatcher = request.getRequestDispatcher("/category_info.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 	/**

@@ -92,5 +92,13 @@
     <servlet-name>CartAPI</servlet-name>
     <url-pattern>/CartAPI</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ProductSearchAPI</servlet-name>
+    <servlet-class>org.elluck91.munchies.ProductSearchAPI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductSearchAPI</servlet-name>
+    <url-pattern>/ProductSearchAPI</url-pattern>
+  </servlet-mapping>
 </web-app>
 

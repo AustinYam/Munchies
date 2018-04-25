@@ -53,18 +53,9 @@
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-categories">
-								<option value="0">All Categories</option>
-								<option value="1">Beverages</option>
-								<option value="1">Baking</option>
-								<option value="1">Breakfast & Cereal</option>
-								<option value="1">Frozen Food</option>
-								<option value="1">Grains & Pasta</option>
-								<option value="1">Produce</option>
-							</select>
-							<button class="search-btn"><i class="fa fa-search"></i></button>
+						<form action = "ProductSearchAPI">
+							<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
+							<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
 					<!-- /Search -->
