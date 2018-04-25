@@ -136,7 +136,10 @@
 									<fmt:formatNumber var = "total_cost" type="currency" maxFractionDigits="2" value="${total}"/>
 									<span><c:out value = "${total_cost}"/></span>
 									<%}%>
-									<c:set var = "discount" value = "${total}"/>
+									<c:if test = "${total < 100}">
+										<c:set var = "discount" value = "0"/>
+										<c:set var = "discount_value" value = "${total}"/>
+									</c:if>
 									<c:if test = "${total >= 100}">
 										<c:set var = "discount" value = "10"/>
 										<c:set var = "discount_value" value = "${total*.90}"/>
@@ -371,8 +374,8 @@
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
-										<th>SHIPING</th>
-										<td colspan="2">Free Shipping</td>
+										<th>Discount</th>
+										<th colspan="2" class = "sub-total">0%</th>
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
