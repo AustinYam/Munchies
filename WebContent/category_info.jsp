@@ -285,13 +285,15 @@
 					<!-- STORE -->
 						<div id="store">
 							<!-- row -->
-								<div class="row">
+							<div class="cointainer">
+								<div class="row myrow">
 									<c:set var = "counter" value = "0"/>
 									<c:forEach items = "${categoryProducts}" var = "record">
 									<c:set var = "counter" value = "${counter+1}"/>
 									<!-- Product Single -->
+									
 									<div class="col-md-4 col-sm-6 col-xs-6">
-										<div class="product product-single">
+										<div class="product product-single ">
 											<div class="product-thumb">
 												<div class="product-label">
 												</div>
@@ -305,7 +307,7 @@
 													</a>
 												</h2>
 												<h4 class="product-price">
-													<c:out value = "${record.product_price}"/>
+													$<c:out value = "${record.product_price}"/>
 												</h4>
 											<form action = "CartAPI" method = "post">
 												<input type = "hidden" name = "product_id" value = "${record.product_id}">
@@ -323,6 +325,7 @@
 									<!-- /Product Single -->
 									</c:forEach>
 								</div>
+							</div>
 								<!-- /row -->
 						</div>
 
