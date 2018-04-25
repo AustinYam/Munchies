@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product"%>
 <html lang="en">
 
 <head>
@@ -121,7 +123,7 @@
 									<!--add quanitity iterator-->
 									<c:set var = "quantity" value = "0"/>
 									<c:forEach items = "${cart.getProductList()}" var = "record">
-										<c:set var = "quantity" value = "${count+1}"/>
+										<c:set var = "quantity" value = "${quantity+record.getProduct_quantity()}"/>
 									</c:forEach>
 									<span class="qty"><c:out value = "${quantity}"/></span>
 									<%} %>
@@ -137,7 +139,7 @@
 									%>
 									<c:set var = "total" value = "0.00"/>
 									<c:forEach items = "${cart.getProductList()}" var = "record">
-										<c:set var = "total" value = "${count + record.getProduct_price()}"/>
+										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
 									<span>$<c:out value = "${total}"/></span>
 									<%}%>
@@ -157,7 +159,7 @@
 													<h3 class="product-price"><a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
 													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
 												</div>
-												<form action=CartAPI method = "post">
+												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
