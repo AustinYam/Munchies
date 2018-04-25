@@ -409,7 +409,7 @@
 								<%}%>
 							</table>
 							<div class="pull-right">
-								<button class="primary-btn">Checkout</button>
+								<button class="primary-btn"><a href = "./payment.jsp">Checkout</a></button>
 							</div>
 						</div>
 
