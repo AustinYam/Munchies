@@ -39,6 +39,7 @@ public class CategoryAPI extends HttpServlet {
 		}
 		
 		request.setAttribute("categoryProducts", productList);
+		request.setAttribute("category", category);
 		RequestDispatcher requestDispatcher; 
 		requestDispatcher = request.getRequestDispatcher("/category_info.jsp");
 		requestDispatcher.forward(request, response);

@@ -1,9 +1,6 @@
 package org.elluck91.munchies;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProductSearchAPI
+ * Servlet implementation class SomethingAPI
  */
-@WebServlet("/ProductSearchAPI")
-public class ProductSearchAPI extends HttpServlet {
+@WebServlet("/SomethingAPI")
+public class SomethingAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductSearchAPI() {
+    public SomethingAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +27,7 @@ public class ProductSearchAPI extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String searchTerm;
-		
-		if ((searchTerm = request.getParameter("product_name")) != null) {
-			System.out.println("searching for products: " + searchTerm);
-			ArrayList<Product> products = new ArrayList<Product>();
-			DbManager db = new DbManager();
-			
-			products = db.productSearch(searchTerm);
-			
-			request.setAttribute("searchedProducts", products);
-			request.setAttribute("search_term", searchTerm);
-			RequestDispatcher requestDispatcher; 
-			requestDispatcher = request.getRequestDispatcher("/productSearch_info.jsp");
-			requestDispatcher.forward(request, response);
-		}
-		
-		
-		
-		
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -58,6 +36,13 @@ public class ProductSearchAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 
 <head>
@@ -54,12 +55,12 @@
 					<!-- /Logo -->
 
 					<!-- Search -->
-					<div class="header-search">
-						<form action = "ProductSearchAPI">
-							<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
-							<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+						<div class="header-search">
+							<form action = "ProductSearchAPI">
+								<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
+								<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
+							</form>
+						</div>
 					<!-- /Search -->
 				</div>
 				<div class="pull-right">
@@ -131,8 +132,19 @@
 									<c:forEach items = "${cart.getProductList()}" var = "record">
 										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
-									<span>$<c:out value = "${total}"/></span>
+									<fmt:formatNumber var = "total_cost" type="currency" maxFractionDigits="2" value="${total}"/>
+									<span><c:out value = "${total_cost}"/></span>
 									<%}%>
+									<c:set var = "discount" value = "${total}"/>
+									<c:if test = "${total >= 100}">
+										<c:set var = "discount" value = "10"/>
+										<c:set var = "discount_value" value = "${total*.90}"/>
+									</c:if>
+									<c:if test = "${total >= 200}">
+										<c:set var = "discount" value = "20"/>
+										<c:set var = "discount_value" value = "${total*.80}"/>
+									</c:if>
+									<fmt:formatNumber var = "discount_total" type="currency" maxFractionDigits="2" value="${discount_value}"/>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
@@ -152,6 +164,7 @@
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<input name="page" type="hidden" value="checkout">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -300,30 +313,8 @@
 						</div>
 					</div>
 
-					<div class="col-md-6">
-						<div class="shiping-methods">
-							<div class="section-title">
-								<h4 class="title">Shiping Methods</h4>
-							</div>
-							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-1" value = "Free Shipping" checked>
-								<label for="shipping-1">Free Shiping -  $0.00</label>
-								<div class="caption">
-									<p>Guaranteed within 3-5 business days
-										<p>
-								</div>
-							</div>
-							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-2" value = "Standard Shipping">
-								<label for="shipping-2">Standard - $4.00</label>
-								<div class="caption">
-									<p>Guaranteed within 1-2 business days
-										<p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12">
+				</form>
+									<div class="col-md-12">
 						<div class="order-summary clearfix">
 							<div class="section-title">
 								<h3 class="title">Order Review</h3>
@@ -349,10 +340,16 @@
 											<td class="details">
 												<a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a>
 											</td>
+											
 											<td class="price text-center"><strong>$<c:out value = "${product.getProduct_price()}"/></strong><br></td>
 											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
 											<td class="total text-center"><strong class="primary-color">$<c:out value = "${product.getProduct_price()*product.getProduct_quantity()}"/></strong></td>
-											<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+											<form id="checkout-form" class="clearfix" action = "CartAPI" method = "post">
+												<input type="hidden" name="product_id" value="${product.getProduct_id() }">
+												<input type="hidden" name="action" value="delete">
+												<input type="hidden" name="page" value="checkout">
+												<td class="text-right"><button type="submit" class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+											</form>
 										</tr>
 										</tbody>
 									</c:forEach>
@@ -364,13 +361,13 @@
 											</tr>
 											<tr>
 												<th class="empty" colspan="3"></th>
-												<th>SHIPING</th>
-												<td colspan="2"><c:out value = "${param.shipping}"/></td>
+												<th>Discount</th>
+												<th colspan="2" class = "sub-total"><c:out value = "${discount}"/>%</th>
 											</tr>
 											<tr>
 												<th class="empty" colspan="3"></th>
 												<th>TOTAL</th>
-												<th colspan="2" class="total">$<c:out value = "${total}"/></th>
+												<th colspan="2" class="total"><c:out value = "${discount_total}"/></th>
 											</tr>
 										</tfoot>
 									<%
@@ -405,7 +402,6 @@
 						</div>
 
 					</div>
-				</form>
 			</div>
 			<!-- /row -->
 		</div>

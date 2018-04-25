@@ -67,16 +67,9 @@ public class TransactionAPI extends HttpServlet {
 				System.out.println("Transaction: " + transaction);
 				tempTransaction = db.getTransactionDetails(transaction);
 				transactionListComplete.add(tempTransaction);
-			}
-			
-			for (Transaction transaction : transactionListComplete) {
-				System.out.println(transaction.toString());
-			}
+			}		
 		}
-		else {
-			System.out.println("Transaction list is empty.");
-		}
-		
+				
 		request.setAttribute("transactionList", transactionListComplete);
 		RequestDispatcher requestDispatcher; 
 		requestDispatcher = request.getRequestDispatcher("/transaction_info.jsp");

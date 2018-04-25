@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 
@@ -41,11 +42,6 @@
 </head>
 
 <body>
-	<c:forEach items = "${transactionList}" var = "transactions">
-		<c:forEach items = "${transactions.productList}" var = "products">
-			<c:out value = "${products.product_id}"/>
-		</c:forEach>
-	</c:forEach>
 	<!-- HEADER -->
 	<header>
 		<!-- header -->
@@ -61,12 +57,12 @@
 					<!-- /Logo -->
 
 					<!-- Search -->
-					<div class="header-search">
-						<form action = "ProductSearchAPI">
-							<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
-							<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+						<div class="header-search">
+							<form action = "ProductSearchAPI">
+								<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
+								<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
+							</form>
+						</div>
 					<!-- /Search -->
 				</div>
 				<div class="pull-right">
@@ -138,7 +134,8 @@
 									<c:forEach items = "${cart.getProductList()}" var = "record">
 										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
-									<span>$<c:out value = "${total}"/></span>
+									<fmt:formatNumber var = "total_cost" type="currency" maxFractionDigits="2" value="${total}"/>
+									<span><c:out value = "${total_cost}"/></span>
 									<%}%>
 							</a>
 							<div class="custom-menu">
@@ -159,6 +156,8 @@
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<input name="username" type="hidden" value="${userid}">
+													<input name="page" type="hidden" value="transaction">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -289,6 +288,26 @@
 							<div class="section-title">
 								<h3 class="title">Transaction History</h3>
 							</div>
+						<%
+							if("${transactionList}" == null){
+						%>
+							<table class="shopping-cart-table table">
+								<thead>
+									<tr>
+										<th class = "text-center">Transaction ID</th>
+										<th class="text-center">Items</th>
+										<th class="text-center">Transaction Date</th>
+										<th class="text-center">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td class="total text-center"><strong class="primary-color"><h1>No Transactions</h1></strong></td>
+											
+										</tr>
+								</tbody>
+							</table>
+						<%} else{%>
 							<c:forEach items = "${transactionList}" var = "record">
 							<table class="shopping-cart-table table">
 								<thead>
@@ -305,17 +324,29 @@
 											<td class="qty text-center">
 											<c:forEach items = "${record.getProductList()}" var = "product">	
 												<a href = "./ProductAPI?product_id=${product.product_id}"><c:out value = "${product.getProduct_uniquename()}"/></a>
-												<a href = "./CartAPI?product_id=${product.getProduct_id()}&count=1">Add to Cart</a>
+												
+												<form action = "CartAPI" method = "post">
+												<input type = "hidden" name = "product_id" value = "${product.product_id}">
+												<input name = "count" class="input" type="hidden" value = "1">
+												<input name="username" type="hidden" value="${userid}">
+												<input name="page" type="hidden" value="transaction">
+												<input name="action" type="hidden" value="add">
+												<div class="product-btn|s">
+													<button name = "Add" class="button-class" type = "submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+												</div>
+											</form>
 												<br/>				
 											</c:forEach>
 											</td>
+											<fmt:formatNumber var = "total_sum" type="currency" maxFractionDigits="2" value="${record.totalSum}"/>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>
-											<td class="total text-center"><strong class="primary-color">$<c:out value = "${record.totalSum}"/></strong></td>
+											<td class="total text-center"><strong class="primary-color"><c:out value = "${total_sum}"/></strong></td>
 											
 										</tr>
 								</tbody>
 							</table>
 							</c:forEach>
+						<%}%>
 							<div class="pull-right">
 							<!--	<button class="primary-btn">Checkout</button>-->
 							</div>

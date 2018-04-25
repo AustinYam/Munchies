@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "java.io.*,java.util.*" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html lang="en">
 
 <head>
@@ -54,12 +57,12 @@
 					<!-- /Logo -->
 
 					<!-- Search -->
-					<div class="header-search">
-						<form action = "ProductSearchAPI">
-							<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
-							<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+						<div class="header-search">
+							<form action = "ProductSearchAPI">
+								<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
+								<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
+							</form>
+						</div>
 					<!-- /Search -->
 				</div>
 				<div class="pull-right">
@@ -131,7 +134,8 @@
 									<c:forEach items = "${cart.getProductList()}" var = "record">
 										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
-									<span>$<c:out value = "${total}"/></span>
+									<fmt:formatNumber var = "total_cost" type="currency" maxFractionDigits="2" value="${total}"/>
+									<span><c:out value = "${total_cost}"/></span>
 									<%}%>
 							</a>
 							<div class="custom-menu">
@@ -152,6 +156,8 @@
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<input name="category" type="hidden" value="${category}">
+													<input name="page" type="hidden" value="category">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -262,7 +268,7 @@
 			<!-- row -->
 			<div class="row">
 				<!-- MAIN -->
-				<div id="main" class="col-md-9">
+				<div id="main" class="col-md-12">
 					<!-- store top filter -->
 					<div class="store-filter clearfix">
 						<div class="pull-left">
@@ -303,6 +309,9 @@
 											<form action = "CartAPI" method = "post">
 												<input type = "hidden" name = "product_id" value = "${record.product_id}">
 												<input name = "count" class="input" type="hidden" value = "1">
+												<input name="category" type="hidden" value="${category}">
+												<input name="page" type="hidden" value="category">
+												<input name="action" type="hidden" value="add">
 												<div class="product-btn|s">
 													<button name = "Add" class="primary-btn add-to-cart" type = "submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 												</div>

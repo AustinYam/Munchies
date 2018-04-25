@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.elluck91.munchies.DbManager;
-import org.elluck91.munchies.User;
-
 /**
  * Servlet implementation class RegisterAPI
  */

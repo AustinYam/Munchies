@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "java.io.*,java.util.*" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 
@@ -41,11 +42,6 @@
 </head>
 
 <body>
-	<c:forEach items = "${transactionList}" var = "transactions">
-		<c:forEach items = "${transactions.productList}" var = "products">
-			<c:out value = "${products.product_id}"/>
-		</c:forEach>
-	</c:forEach>
 	<!-- HEADER -->
 	<header>
 		<!-- header -->
@@ -61,21 +57,12 @@
 					<!-- /Logo -->
 
 					<!-- Search -->
-					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-categories">
-								<option value="0">All Categories</option>
-								<option value="1">Beverages</option>
-								<option value="1">Baking</option>
-								<option value="1">Breakfast & Cereal</option>
-								<option value="1">Frozen Food</option>
-								<option value="1">Grains & Pasta</option>
-								<option value="1">Produce</option>
-							</select>
-							<button class="search-btn"><i class="fa fa-search"></i></button>
-						</form>
-					</div>
+						<div class="header-search">
+							<form action = "ProductSearchAPI">
+								<input class="input" type="text" name = "product_name" placeholder="Enter your keyword">
+								<button class="search-btn" type = "submit"><i class="fa fa-search"></i></button>
+							</form>
+						</div>
 					<!-- /Search -->
 				</div>
 				<div class="pull-right">
@@ -129,7 +116,7 @@
 									<!--add quanitity iterator-->
 									<c:set var = "quantity" value = "0"/>
 									<c:forEach items = "${cart.getProductList()}" var = "record">
-										<c:set var = "quantity" value = "${count+1}"/>
+										<c:set var = "quantity" value = "${quantity+record.getProduct_quantity()}"/>
 									</c:forEach>
 									<span class="qty"><c:out value = "${quantity}"/></span>
 									<%} %>
@@ -145,9 +132,10 @@
 									%>
 									<c:set var = "total" value = "0.00"/>
 									<c:forEach items = "${cart.getProductList()}" var = "record">
-										<c:set var = "total" value = "${count + record.getProduct_price()}"/>
+										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
-									<span>$<c:out value = "${total}"/></span>
+									<fmt:formatNumber var = "total_cost" type="currency" maxFractionDigits="2" value="${total}"/>
+									<span><c:out value = "${total_cost}"/></span>
 									<%}%>
 							</a>
 							<div class="custom-menu">
@@ -165,9 +153,11 @@
 													<h3 class="product-price"><a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
 													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
 												</div>
-												<form action=CartAPI method = "post">
+												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<input name="searched_term" type="hidden" value="${search_term}">
+													<input name="page" type="hidden" value="productSearch">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -264,8 +254,8 @@
 	<div id="breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li class="active">History</li>
+				<li><a href="./index.jsp">Home</a></li>
+				<li class="active">Products</li>
 			</ul>
 		</div>
 	</div>
@@ -277,69 +267,70 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!-- ASIDE -->
-				
-				<!-- /ASIDE -->
-
 				<!-- MAIN -->
-				<div id="main" class="col-md-9">
+				<div id="main" class="col-md-12">
+					
 					<!-- store top filter -->
 					<div class="store-filter clearfix">
 						<div class="pull-left">
-						</div>
-						<div class="pull-right">
+							<div class="row-filter">
+								<h3>Searched Product: ${search_term }</h3>
+							</div>
 						</div>
 					</div>
 					<!-- /store top filter -->
 
 					<!-- STORE -->
-								<div class="col-md-12">
-						<div class="order-summary clearfix">
-							<div class="section-title">
-								<h3 class="title">Search Results</h3>
+						<div id="store">
+							<!-- row -->
+							<div class="cointainer">
+								<div class="row myrow">
+									<c:set var = "counter" value = "0"/>
+									<c:forEach items = "${searchedProducts}" var = "record">
+									<c:set var = "counter" value = "${counter+1}"/>
+									<!-- Product Single -->
+									
+									<div class="col-md-4 col-sm-6 col-xs-6">
+										<div class="product product-single ">
+											<div class="product-thumb">
+												<div class="product-label">
+												</div>
+												<button class="main-btn quick-view"><i class="fa fa-search-plus"></i><a href = "./ProductAPI?product_id=${record.product_id}">View</a></button>
+												<img href = "./ProductAPI?product_id=${record.product_id}" src="${record.product_img}" alt =" Image not found">
+											</div>
+											<div class="product-body">
+												<h2 class="product-name">
+													<a href="./ProductAPI?product_id=${record.product_id}">
+														<h3><c:out value = "${record.product_uniquename}"/></h3>
+													</a>
+												</h2>
+												<h4 class="product-price">
+													$<c:out value = "${record.product_price}"/>
+												</h4>
+											<form action = "CartAPI" method = "post">
+												<input type = "hidden" name = "product_id" value = "${record.product_id}">
+												<input name = "count" class="input" type="hidden" value = "1">
+												<input name="searched_term" type="hidden" value="${search_term}">
+												<input name="page" type="hidden" value="productSearch">
+												<input name="action" type="hidden" value="add">
+												<div class="product-btn|s">
+													<button name = "Add" class="primary-btn add-to-cart" type = "submit"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+												</div>
+											</form>
+											</div>
+										</div>
+									</div>
+									<c:if test ="${counter % 3 == 0}">
+										<div class="clearfix visible-md visible-lg"></div>
+									</c:if>
+									<!-- /Product Single -->
+									</c:forEach>
+								</div>
 							</div>
-							<c:forEach items = "${transactionList}" var = "record">
-							<table class="shopping-cart-table table">
-								<thead>
-									<tr>
-										<th class = "text-center">Transaction ID</th>
-										<th class="text-center">Items</th>
-										<th class="text-center">Transaction Date</th>
-										<th class="text-center">Total</th>
-									</tr>
-								</thead>
-								<tbody>
-										<tr>
-											<td class="price text-center"><strong><c:out value = "${record.transaction_id}"/></strong><br></td>
-											<td class="qty text-center">
-											<c:forEach items = "${record.getProductList()}" var = "product">	
-												<a href = "./ProductAPI?product_id=${product.product_id}"><c:out value = "${product.getProduct_uniquename()}"/></a>
-											</c:forEach>
-											</td>
-											<td class="total text-center"><strong class="primary-color"><c:out value = "${record.date}"/></strong></td>
-											<td class="total text-center"><strong class="primary-color">$<c:out value = "${record.totalSum}"/></strong></td>
-										</tr>
-								</tbody>
-							</table>
-							</c:forEach>
-							<div class="pull-right">
-							<!--	<button class="primary-btn">Checkout</button>-->
-							</div>
+								<!-- /row -->
 						</div>
 
-					</div>
 					<!-- /STORE -->
-
-					<!-- store bottom filter -->
-					<div class="store-filter clearfix">
-						<div class="pull-left">
-
-						</div>
-						<div class="pull-right">
-							
-						</div>
-					</div>
-					<!-- /store bottom filter -->
 				</div>
 				<!-- /MAIN -->
 			</div>

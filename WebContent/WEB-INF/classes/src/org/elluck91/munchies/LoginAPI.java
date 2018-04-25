@@ -82,7 +82,7 @@ public class LoginAPI extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.getParameter("Login")!=null){
+		if(request.getParameter("Login")!=null) {
 			DbManager db = new DbManager();
 			User user = new User();
 
@@ -95,16 +95,17 @@ public class LoginAPI extends HttpServlet {
 				// in seconds
 				session.setMaxInactiveInterval(600);
 				session.setAttribute("userid", user.username);
-				System.out.println("Log in successful.");
+
 				response.sendRedirect("./index.jsp");
 			}
 			else {
-				System.out.println("Log in denied.");
-				response.sendRedirect("./login.jsp?");
+				response.sendRedirect("./index.jsp");
 			}
 		}
-
-
+		else {
+			System.out.println("Log in denied.");
+			response.sendRedirect("./login.jsp?");
+		}
 	}
 
 	/**
