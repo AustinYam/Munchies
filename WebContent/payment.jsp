@@ -470,8 +470,8 @@
 					<div class="footer">
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="./aboutus.jsp">About Us</a></li>
+							<li><a href="./privacy.jsp">Privacy</a></li>
 						</ul>
 					</div>
 				</div>

@@ -251,7 +251,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
-				<li class="active">Checkout</li>
+				<li class="active">Login</li>
 			</ul>
 		</div>
 	<!-- /BREADCRUMB -->
@@ -279,6 +279,9 @@
 							<div class="form-group">
 								<div class="input-checkbox">
 									<button name = "Login" class="primary-btn" type ="submit">Login</button>
+									<% if (request.getParameter("access") != null && request.getParameter("access").equals("denied")) {
+										out.println("Entered credentials don't much our record.");
+									}%>
 								</div>
 							</div>
 						</div>
@@ -346,8 +349,8 @@
 					<div class="footer">
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="./aboutus.jsp">About Us</a></li>
+							<li><a href="./privacy.jsp">Privacy</a></li>
 						</ul>
 					</div>
 				</div>

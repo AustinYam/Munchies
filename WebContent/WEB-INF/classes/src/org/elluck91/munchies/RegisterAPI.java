@@ -51,7 +51,7 @@ public class RegisterAPI extends HttpServlet {
 			
 			System.out.println("Server response: " + res);
 			if(res == 1)
-				response.sendRedirect("./index.jsp");
+				response.sendRedirect("./login.jsp");
 			else {
 				response.sendRedirect("./register.jsp");
 			}

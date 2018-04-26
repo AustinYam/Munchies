@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.ArrayList, org.elluck91.munchies.Product" %>
+
 <html lang="en">
 
 <head>
@@ -132,22 +133,8 @@
 									<c:forEach items = "${cart.getProductList()}" var = "record">
 										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
-									<fmt:formatNumber var = "total_cost" type="currency" maxFractionDigits="2" value="${total}"/>
-									<span><c:out value = "${total_cost}"/></span>
+									<span>$<c:out value = "${total}"/></span>
 									<%}%>
-									<c:if test = "${total < 100}">
-										<c:set var = "discount" value = "0"/>
-										<c:set var = "discount_value" value = "${total}"/>
-									</c:if>
-									<c:if test = "${total >= 100}">
-										<c:set var = "discount" value = "10"/>
-										<c:set var = "discount_value" value = "${total*.90}"/>
-									</c:if>
-									<c:if test = "${total >= 200}">
-										<c:set var = "discount" value = "20"/>
-										<c:set var = "discount_value" value = "${total*.80}"/>
-									</c:if>
-									<fmt:formatNumber var = "discount_total" type="currency" maxFractionDigits="2" value="${discount_value}"/>
 							</a>
 							<div class="custom-menu">
 								<div id="shopping-cart">
@@ -167,7 +154,8 @@
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
-													<input name="page" type="hidden" value="checkout">
+													<input name="username" type="hidden" value="${userid}">
+													<input name="page" type="hidden" value="transaction">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -240,7 +228,6 @@
 								<li class="dropdown side-dropdown">
 									<a class="dropdown-toggle" href = "./CategoryAPI?category=produce">Produce<i class="fa fa-angle-right"></i></a>
 								</li>
-							</form>
 						</ul>
 					</div>
 				</div>
@@ -261,150 +248,55 @@
 	<!-- /NAVIGATION -->
 
 
-	<!-- BREADCRUMB -->
-	<div id="breadcrumb">
-		<div class="container">
-			<ul class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li class="active">Checkout</li>
-			</ul>
-		</div>
-	</div>
-	<!-- /BREADCRUMB -->
-
 	<!-- section -->
 	<div class="section">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<form id="checkout-form" class="clearfix" action = "CheckoutAPI" method = "post" onSubmit = "return checkforblank()">
-					<div class="col-md-6">
-						<div class="billing-details">
-						<% 
-								if (username == null){
-							%>
-							<p>Already a customer ? <a href="./login.jsp">Login</a></p>
-								<% }%>
-							<div class="section-title">
-								<h3 class="title">Billing Details</h3>
-							</div>
-							<div class="form-group">
-								<input id = "name" class="input" type="text" name="name" placeholder="Name">
-							</div>
-							<div class="form-group">
-								<input id = "email" class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input id = "address" class="input" type="text" name="address" placeholder="Address">
-							</div>
-							<div class="form-group">
-								<input id = "city" class="input" type="text" name="city" placeholder="City">
-							</div>
-							<div class="form-group">
-								<input id = "state" class="input" type="text" name="state" placeholder="State">
-							</div>
-							<div class="form-group">
-								<input id = "country" class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input id = "zipcode" class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input id = "tel" class="input" type="tel" name="tel" placeholder="Telephone">
-							</div>
+				<!-- ASIDE -->
+				
+				<!-- /ASIDE -->
+
+				<!-- MAIN -->
+				<div id="main" class="col-md-9">
+					<!-- store top filter -->
+					<div class="store-filter clearfix">
+						<div class="pull-left">
+						</div>
+						<div class="pull-right">
 						</div>
 					</div>
+					<!-- /store top filter -->
 
-				</form>
-									<div class="col-md-12">
+					<!-- STORE -->
+								<div class="col-md-12">
 						<div class="order-summary clearfix">
 							<div class="section-title">
-								<h3 class="title">Order Review</h3>
+								<h3 class="title">About Us </h3>
+								<p>
+									All of our stores were founded around the philosophy of offering customers the products they wanted to buy at a fair price, with lots of tender, loving care. We still open our doors every day today with that in mind, and because of it, we run really great stores.
+								</p>
 							</div>
-							<table class="shopping-cart-table table">
-								<thead>
-									<tr>
-										<th>Product</th>
-										<th></th>
-										<th class="text-center">Price</th>
-										<th class="text-center">Quantity</th>
-										<th class="text-center">Total</th>
-										<th class="text-right"></th>
-									</tr>
-								</thead>
-								<tbody>
-									<%
-										if(session.getAttribute("cart") != null) {
-									%>
-									<c:forEach items="${cart.getProductList()}" var="product">
-										<tr>
-											<td class="thumb"><img src="${product.getProduct_img()}" alt=""></td>
-											<td class="details">
-												<a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a>
-											</td>
-											
-											<td class="price text-center"><strong>$<c:out value = "${product.getProduct_price()}"/></strong><br></td>
-											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
-											<td class="total text-center"><strong class="primary-color">$<c:out value = "${product.getProduct_price()*product.getProduct_quantity()}"/></strong></td>
-											<form id="checkout-form" class="clearfix" action = "CartAPI" method = "post">
-												<input type="hidden" name="product_id" value="${product.getProduct_id() }">
-												<input type="hidden" name="action" value="delete">
-												<input type="hidden" name="page" value="checkout">
-												<td class="text-right"><button type="submit" class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
-											</form>
-										</tr>
-										</tbody>
-									</c:forEach>
-										<tfoot>
-											<tr>
-												<th class="empty" colspan="3"></th>
-												<th>SUBTOTAL</th>
-												<th colspan="2" class="sub-total">$<c:out value = "${total}"/></th>
-											</tr>
-											<tr>
-												<th class="empty" colspan="3"></th>
-												<th>Discount</th>
-												<th colspan="2" class = "sub-total"><c:out value = "${discount}"/>%</th>
-											</tr>
-											<tr>
-												<th class="empty" colspan="3"></th>
-												<th>TOTAL</th>
-												<th colspan="2" class="total"><c:out value = "${discount_total}"/></th>
-											</tr>
-										</tfoot>
-									<%
-										}else{
-									%>
-									<tr>
-										<h2>Empty Cart</h2>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<th class="empty" colspan="3"></th>
-										<th>SUBTOTAL</th>
-										<th colspan="2" class="sub-total">$0.00</th>
-									</tr>
-									<tr>
-										<th class="empty" colspan="3"></th>
-										<th>Discount</th>
-										<th colspan="2" class = "sub-total">0%</th>
-									</tr>
-									<tr>
-										<th class="empty" colspan="3"></th>
-										<th>TOTAL</th>
-										<th colspan="2" class="total">$0.00</th>
-									</tr>
-								</tfoot>
-								<%}%>
-							</table>
 							<div class="pull-right">
-								<button class="primary-btn"><a href = "./payment.jsp">Checkout</a></button>
+							<!--	<button class="primary-btn">Checkout</button>-->
 							</div>
 						</div>
-
 					</div>
+					<!-- /STORE -->
+
+					<!-- store bottom filter -->
+					<div class="store-filter clearfix">
+						<div class="pull-left">
+
+						</div>
+						<div class="pull-right">
+							
+						</div>
+					</div>
+					<!-- /store bottom filter -->
+				</div>
+				<!-- /MAIN -->
 			</div>
 			<!-- /row -->
 		</div>
@@ -466,8 +358,8 @@
 					<div class="footer">
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
-							<li><a href="./aboutus.jsp">About Us</a></li>
-							<li><a href="./privacy.jsp">Privacy</a></li>
+							<li><a href="#">About Us</a></li>
+							<li><a href="#">FAQ</a></li>
 						</ul>
 					</div>
 				</div>
@@ -481,7 +373,7 @@
 					<!-- footer copyright -->
 					<div class="footer-copyright">
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" Munchies="_blank">Colorlib</a>
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					</div>
 					<!-- /footer copyright -->
@@ -492,49 +384,6 @@
 		<!-- /container -->
 	</footer>
 	<!-- /FOOTER -->
-	
-	<script type = "text/javascript">
-		
-	</script>
-	
-	
-	<script type = "text/javascript">
-	
-	function checkforblank(){
-		
-		var errormessage = "";
-	if(document.getElementById('name').value == ""){
-			errormessage += "Name is required \n";
-		}
-		if(document.getElementById('email').value == "" || document.getElementById('email').value.includes("@")){
-			errormessage += "Valid email is required \n";
-		}
-		if(document.getElementById('address').value == ""){
-			errormessage += "Address is required \n";
-		}
-		if(document.getElementById('city').value == ""){
-			errormessage += "City is required \n";
-		}
-		if(document.getElementById('state').value == ""){
-			errormessage += "state is required \n";
-		}
-		if(document.getElementById('country').value == ""){
-			errormessage += "Country is required \n";
-		}
-		if(document.getElementById('zipcode').value == ""){
-			errormessage += "Zip Code is required \n";
-		}
-		if(document.getElementById('tel').value == ""){
-			errormessage += "Telephone number is required \n";
-		}
-		if(errormessage != ""){
-			alert(errormessage);
-			return false;
-		}
-	
-			
-	}
-	</script>
 
 	<!-- jQuery Plugins -->
 	<script src="js/jquery.min.js"></script>

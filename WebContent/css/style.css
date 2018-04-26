@@ -1250,6 +1250,7 @@ VALIDATE
 }
 
 .product.product-widget .product-price {
+  margin-right: 25px;
   font-size: 18px;
   margin-bottom: 5px;
 }

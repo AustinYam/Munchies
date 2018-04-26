@@ -288,10 +288,11 @@
 						<form action = "CartAPI" method = "post">	
 							<div class="product-btns">
 								<div class="qty-input">
-									<input name = "product_id" type = "hidden" value ="${product.product_id}">
+									<input name = "product_id" type = "hidden" value ="${product.getProduct_id()}">
 									<span class="text-uppercase">QTY: </span>
 									<input name = "count" class="input" type="number" value = "1">
 									<input name="page" type="hidden" value="product">
+									<input type="hidden" value="${product.getProduct_id()}" name="current_product">
 									<input name="action" type="hidden" value="add">
 								</div>
 							</div>
@@ -370,8 +371,8 @@
 					<div class="footer">
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="./aboutus.jsp">About Us</a></li>
+							<li><a href="./privacy.jsp">Privacy</a></li>
 						</ul>
 					</div>
 				</div>

@@ -99,12 +99,12 @@ public class LoginAPI extends HttpServlet {
 				response.sendRedirect("./index.jsp");
 			}
 			else {
-				response.sendRedirect("./index.jsp");
+				response.sendRedirect("./login.jsp?access=denied");
 			}
 		}
 		else {
 			System.out.println("Log in denied.");
-			response.sendRedirect("./login.jsp?");
+			response.sendRedirect("./login.jsp?access=denied");
 		}
 	}
 
