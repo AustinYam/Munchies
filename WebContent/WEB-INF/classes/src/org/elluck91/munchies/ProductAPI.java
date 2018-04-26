@@ -30,13 +30,15 @@ public class ProductAPI extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Product product = null;
+		String product_id = null;
 		DbManager db = new DbManager();
 		
-		if(request.getParameter("product_id") != null) {
+		if((product_id = request.getParameter("product_id")) != null) {
 			product = db.getProduct(request.getParameter("product_id"));
 		}
 		
 		request.setAttribute("product", product);
+		request.setAttribute("product_id", product_id)
 		RequestDispatcher requestDispatcher; 
 		requestDispatcher = request.getRequestDispatcher("/product_info.jsp");
 		requestDispatcher.forward(request, response);

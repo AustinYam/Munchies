@@ -146,12 +146,12 @@
 													<img src= "${product.getProduct_img()}" alt="nope">
 												</div>
 												<div class="product-body">
-													<h3 class="product-price"><a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
+													<h3 class="product-price"><a href="./ProductAPI?product_id=${product.getProduct_id()}"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
 													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
 												</div>
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
-													<input type="hidden" value="${product.getProduct_id() }" name="product_id">											
+													<input type="hidden" value="${product.getProduct_id()}" name="product_id">											
 													<input name="page" type="hidden" value="product">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
