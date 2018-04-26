@@ -180,6 +180,7 @@
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
+													<input type="hidden" value="payment" name="page">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -198,7 +199,6 @@
 										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
 										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
@@ -277,7 +277,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
-				<li class="active">Checkout</li>
+				<li class="active">Payment</li>
 			</ul>
 		</div>
 	</div>
@@ -318,6 +318,14 @@
 							<div class="form-group">
 							
 							</div>
+							<div class="pull-right">
+							
+								<input type="hidden" name="productList" value="${product_ids }">
+								<input type="hidden" name="username" value="${userid}">
+								<input type="hidden" name="totalSum" value="${discount_value}">
+								<button class="primary-btn" type="submit">Place Order</button>
+							</div>
+						</form>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -351,7 +359,12 @@
 											<td class="price text-center"><strong>$<c:out value = "${product.getProduct_price()}"/></strong><br></td>
 											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
 											<td class="total text-center"><strong class="primary-color"><c:out value = "${total_cost}"/></strong></td>
-											<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+											<form id="checkout-form" class="clearfix" action = "CartAPI" method = "post">
+												<input type="hidden" name="product_id" value="${product.getProduct_id() }">
+												<input type="hidden" name="action" value="delete">
+												<input type="hidden" name="page" value="checkout">
+												<td class="text-right"><button type="submit" class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+											</form>
 										</tr>
 										</tbody>
 									</c:forEach>
@@ -398,17 +411,10 @@
 								</tfoot>
 								<%}%>
 							</table>
-							<div class="pull-right">
 							
-								<input type="hidden" name="productList" value="${product_ids }">
-								<input type="hidden" name="username" value="${userid}">
-								<input type="hidden" name="totalSum" value="${discount_value}">
-								<button class="primary-btn" type="submit">Place Order</button>
-							</div>
 						</div>
 
 					</div>
-				</form>
 			</div>
 			<!-- /row -->
 		</div>

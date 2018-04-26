@@ -176,7 +176,6 @@
 										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
 										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>

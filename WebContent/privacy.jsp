@@ -155,7 +155,7 @@
 													<input type="hidden" value="delete" name="action">
 													<input type="hidden" value="${product.getProduct_id() }" name="product_id">
 													<input name="username" type="hidden" value="${userid}">
-													<input name="page" type="hidden" value="transaction">
+													<input name="page" type="hidden" value="privacy">
 													<button class="cancel-btn" type = "submit"><i class="fa fa-trash"></i></button>
 												</form>
 											</div>
@@ -174,7 +174,6 @@
 										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
 										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
@@ -604,8 +603,8 @@ Under Store Cameras section – added information about the use of cameras for b
 					<div class="footer">
 						<h3 class="footer-header">Customer Service</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="./aboutus.jsp">About Us</a></li>
+							<li><a href="./privacy.jsp">Privacy</a></li>
 						</ul>
 					</div>
 				</div>

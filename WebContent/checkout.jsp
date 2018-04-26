@@ -128,7 +128,7 @@
 									<%
 									}else {
 									%>
-									<c:set var = "total" value = "0.00"/>
+									<c:set var = "total" value = "0"/>
 									<c:forEach items = "${cart.getProductList()}" var = "record">
 										<c:set var = "total" value = "${total + record.getProduct_price()*record.getProduct_quantity()}"/>
 									</c:forEach>
@@ -186,7 +186,6 @@
 										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
 										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
@@ -314,8 +313,10 @@
 								<input id = "tel" class="input" type="tel" name="tel" placeholder="Telephone">
 							</div>
 						</div>
+						<div class="pull-right">
+								<button class="primary-btn" formaction = "./payment.jsp" type="submit">Checkout</button>
+							</div>
 					</div>
-
 				</form>
 									<div class="col-md-12">
 						<div class="order-summary clearfix">
@@ -360,7 +361,7 @@
 											<tr>
 												<th class="empty" colspan="3"></th>
 												<th>SUBTOTAL</th>
-												<th colspan="2" class="sub-total">$<c:out value = "${total}"/></th>
+												<th colspan="2" class="sub-total"><c:out value = "${total_cost}"/></th>
 											</tr>
 											<tr>
 												<th class="empty" colspan="3"></th>
@@ -399,9 +400,7 @@
 								</tfoot>
 								<%}%>
 							</table>
-							<div class="pull-right">
-								<button class="primary-btn"><a href = "./payment.jsp">Checkout</a></button>
-							</div>
+					<!--old checkout-->
 						</div>
 
 					</div>
@@ -506,7 +505,7 @@
 	if(document.getElementById('name').value == ""){
 			errormessage += "Name is required \n";
 		}
-		if(document.getElementById('email').value == "" || document.getElementById('email').value.includes("@")){
+		if(document.getElementById('email').value == ""){
 			errormessage += "Valid email is required \n";
 		}
 		if(document.getElementById('address').value == ""){

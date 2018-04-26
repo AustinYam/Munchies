@@ -165,7 +165,7 @@
 										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
+												<img src="" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price"><span class="qty"></span></h3>
@@ -176,7 +176,6 @@
 										<%}%>
 									</div>
 									<div class="shopping-cart-btns">
-										<button class="main-btn">View Cart</button>
 										<a href = "./checkout.jsp" button class="primary-btn" >Checkout <i class="fa fa-arrow-circle-right"></i></a>
 									</div>
 								</div>
