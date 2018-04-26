@@ -69,7 +69,7 @@ public class CartAPI extends HttpServlet {
 		else if (request.getParameter("page").equals("category"))
 			response.sendRedirect("./CategoryAPI?category=" + request.getParameter("category"));
 		else if (request.getParameter("page").equals("product"))
-			response.sendRedirect("./ProductAPI?product_id=" + request.getParameter("product_id"));
+			response.sendRedirect("./ProductAPI?product_id=" + request.getParameter("current_product"));
 		else if (request.getParameter("page").equals("productSearch")) {
 			response.sendRedirect("./ProductSearchAPI?product_name=" + request.getParameter("searched_term"));
 		}

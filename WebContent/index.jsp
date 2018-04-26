@@ -302,10 +302,34 @@
 			<div class="row">
 				<!-- banner -->
 				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1" href="./CategoryAPI?category=produce">
-						<img src="./img/fruit.jpg" alt="">
+					<a class="banner banner-1" href="./CategoryAPI?category=beverage">
+						<img src="./img/wine.jpg" alt="">
 						<div class="banner-caption text-center">
-							<h1 class="white-color font-weak">Fresh Produce</h2>
+							<h1 class="white-color font-weak">Beverages</h2>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<a class="banner banner-1" href="./CategoryAPI?category=baking">
+						<img src="./img/bread.jpg" alt="">
+						<div class="banner-caption text-center">
+							<h1 class="white-color font-weak">Baking</h2>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<a class="banner banner-1" href="./CategoryAPI?category=breakfast">
+						<img src="./img/breakfast.jpg" alt="">
+						<div class="banner-caption text-center">
+							<h1 class="white-color font-weak">Breakfast</h2>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6">
+					<a class="banner banner-1" href="./CategoryAPI?category=frozenfood">
+						<img src="./img/frozen.jpg" alt="">
+						<div class="banner-caption text-center">
+							<h1 class="white-color font-weak">Frozen Food</h2>
 						</div>
 					</a>
 				</div>
@@ -313,10 +337,10 @@
 
 				<!-- banner -->
 				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1 " href="./CategoryAPI?category=beverages">
-						<img src="./img/wine.jpg" alt="">
+					<a class="banner banner-1 " href="./CategoryAPI?category=grain&pasta">
+						<img src="./img/grain.jpg" alt="">
 						<div class="banner-caption text-center">
-							<h1 class="white-color font-weak">New Collection</h2>
+							<h1 class="white-color font-weak">Grain & Pasta</h2>
 						</div>
 					</a>
 				</div>
@@ -324,15 +348,14 @@
 
 				<!-- banner -->
 				<div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-					<a class="banner banner-1" href="./CategoryAPI?category=grain">
-						<img src="./img/Heinz.png" alt="">
+					<a class="banner banner-1" href="./CategoryAPI?category=produce">
+						<img src="./img/fresh.jpg" alt="">
 						<div class="banner-caption text-center">
-							<h1 class="white-color font-weak">Discounted Prices</h2>
+							<h1 class="white-color font-weak">Fresh Produce</h2>
 						</div>
 					</a>
 				</div>
 				<!-- /banner -->
-
 			</div>
 			<!-- /row -->
 		</div>

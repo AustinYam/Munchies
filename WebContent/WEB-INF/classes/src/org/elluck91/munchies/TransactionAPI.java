@@ -89,11 +89,12 @@ public class TransactionAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		DbManager db = new DbManager();
 		String username = (String) request.getParameter("username");
 		System.out.println("Username: " + username);
 		if (username.equals("")) {
-			request.setAttribute("cart", new Cart());
+			session.setAttribute("cart", new Cart());
 		}
 		else {
 			int transaction_id = 1;
@@ -109,6 +110,7 @@ public class TransactionAPI extends HttpServlet {
 			System.out.println("Updating user");
 			db.updateUser(username, transaction_id);
 			request.setAttribute("cart", new Cart());
+			session.setAttribute("cart", new Cart());
 		}
 		
 		RequestDispatcher requestDispatcher; 

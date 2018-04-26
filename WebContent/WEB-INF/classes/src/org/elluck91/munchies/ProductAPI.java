@@ -38,7 +38,7 @@ public class ProductAPI extends HttpServlet {
 		}
 		
 		request.setAttribute("product", product);
-		request.setAttribute("product_id", product_id)
+		request.setAttribute("product_id", product_id);
 		RequestDispatcher requestDispatcher; 
 		requestDispatcher = request.getRequestDispatcher("/product_info.jsp");
 		requestDispatcher.forward(request, response);
