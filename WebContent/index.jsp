@@ -150,7 +150,8 @@
 												</div>
 												<div class="product-body">
 													<h3 class="product-price"><a href="./ProductAPI?product_id=${product.getProduct_id()}"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
-													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
+													<h3 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
+													<h3 class="product-name">qty: <span class="qty"><c:out value = "${product.getProduct_quantity()}"/></span></h3>
 												</div>
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
@@ -260,7 +261,7 @@
 						<div class="banner-caption text-center">
 							<h1 class = "white-color">Sale</h1>
 							<h1 class="white-color font-weak">Up to 10% OFF</h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href = "#shop"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -270,7 +271,7 @@
 						<img src="./img/foodbanner2.jpg" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href = "#shop"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -280,7 +281,7 @@
 						<img src="./img/foodbanner3.jpg" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color">New Product <span>Collection</span></h1>
-							<button class="primary-btn">Shop Now</button>
+							<a href = "#shop"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
 					<!-- /banner -->
@@ -294,7 +295,7 @@
 	<!-- /HOME -->
 
 	<!-- section -->
-	<div class="section">
+	<div id = "shop" class="section">
 		<!-- container -->
 		<div class="container">
 			<!-- row -->

@@ -175,7 +175,8 @@
 												</div>
 												<div class="product-body">
 													<h3 class="product-price"><a href="./ProductAPI?product_id=${product.getProduct_id()}"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
-													<h2 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
+													<h3 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
+													<h3 class="product-name">qty: <span class="qty"><c:out value = "${product.getProduct_quantity()}"/></span></h3>
 												</div>
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
@@ -322,7 +323,11 @@
 							
 								<input type="hidden" name="productList" value="${product_ids }">
 								<input type="hidden" name="username" value="${userid}">
+								<%if(username != null){%>
 								<input type="hidden" name="totalSum" value="${discount_value}">
+								<%}else{%>
+								<input type="hidden" name="totalSum" value="${total_cost}">
+								<%}%>
 								<button class="primary-btn" type="submit">Place Order</button>
 							</div>
 						</form>

@@ -66,6 +66,10 @@ public class CartAPI extends HttpServlet {
 			response.sendRedirect("./checkout.jsp");
 		else if (request.getParameter("page").equals("payment"))
 			response.sendRedirect("./payment.jsp");
+		else if (request.getParameter("page").equals("aboutus"))
+			response.sendRedirect("./aboutus.jsp");
+		else if (request.getParameter("page").equals("privacy"))
+			response.sendRedirect("./privacy.jsp");
 		else if (request.getParameter("page").equals("index"))
 			response.sendRedirect("./index.jsp");
 		else if (request.getParameter("page").equals("category"))
