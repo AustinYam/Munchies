@@ -279,7 +279,7 @@
 								<div class="input-checkbox">
 									<button name = "Login" class="primary-btn" type ="submit">Login</button>
 									<% if (request.getParameter("access") != null && request.getParameter("access").equals("denied")) {
-										out.println("Entered credentials don't much our record.");
+										out.println("Entered credentials do not match our records.");
 									}%>
 								</div>
 							</div>

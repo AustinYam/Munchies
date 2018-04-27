@@ -363,9 +363,10 @@
 												<th>SUBTOTAL</th>
 												<th colspan="2" class="sub-total"><c:out value = "${total_cost}"/></th>
 											</tr>
+											<%if(username != null){%>
 											<tr>
 												<th class="empty" colspan="3"></th>
-												<th>Discount</th>
+												<th>DISCOUNT</th>
 												<th colspan="2" class = "sub-total"><c:out value = "${discount}"/>%</th>
 											</tr>
 											<tr>
@@ -373,6 +374,18 @@
 												<th>TOTAL</th>
 												<th colspan="2" class="total"><c:out value = "${discount_total}"/></th>
 											</tr>
+											<%}else{%>
+											<tr>
+												<th class="empty" colspan="3"></th>
+												<th>DISCOUNT</th>
+												<th colspan="2" class = "sub-total">For Register Users</th>
+											</tr>
+											<tr>
+												<th class="empty" colspan="3"></th>
+												<th>TOTAL</th>
+												<th colspan="2" class="total"><c:out value = "${total_cost}"/></th>
+											</tr>
+											<%}%>
 										</tfoot>
 									<%
 										}else{
