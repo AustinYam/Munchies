@@ -161,7 +161,7 @@
 										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
+												<img src="./img/MunchiesLogo.jpg" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price"><span class="qty"></span></h3>

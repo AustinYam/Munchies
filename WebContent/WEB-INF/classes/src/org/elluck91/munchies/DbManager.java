@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.*;
 
 import com.mysql.jdbc.Statement;
 
@@ -341,7 +342,7 @@ public class DbManager implements IRepo{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con  = DriverManager.getConnection("jdbc:mysql://localhost/munchies","root","admin");
-			PreparedStatement sql = con.prepareStatement("SELECT * FROM product where product_name=?");
+			PreparedStatement sql = con.prepareStatement("SELECT * FROM product where product_name = ?");
 			sql.setString(1, productName);
 
 			ResultSet res = sql.executeQuery();
@@ -353,6 +354,29 @@ public class DbManager implements IRepo{
 				searchedProducts.add(product);
 				
 			}
+			sql = con.prepareStatement("SELECT * FROM product where product_uniquename like ?");
+			sql.setString(1, "%" + productName + "%");
+
+			res = sql.executeQuery();
+			
+			while (res.next()) {
+				product = new Product(res.getString("product_uniquename"), res.getString("product_name"),
+						res.getDouble("product_price"), res.getString("product_description"),
+						res.getString("product_img"), res.getString("product_category"), res.getInt("product_id"));
+				searchedProducts.add(product);
+			}
+			sql = con.prepareStatement("SELECT * FROM product where product_category = ?");
+			sql.setString(1, productName);
+
+			res = sql.executeQuery();
+			
+			while (res.next()) {
+				product = new Product(res.getString("product_uniquename"), res.getString("product_name"),
+						res.getDouble("product_price"), res.getString("product_description"),
+						res.getString("product_img"), res.getString("product_category"), res.getInt("product_id"));
+				searchedProducts.add(product);
+			}
+				
 			
 			con.close();
 		} catch (ClassNotFoundException e) {
@@ -362,8 +386,16 @@ public class DbManager implements IRepo{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ArrayList<Product> resultProducts = new ArrayList<Product>();
+		Set<String> titles = new HashSet<String>();
+
+		for( Product p : searchedProducts ) {
+			if( titles.add( p.getProduct_uniquename())) {
+			resultProducts.add(p);
+			}
+		}
 		
-		return searchedProducts;
+		return resultProducts;
 	}
 
 

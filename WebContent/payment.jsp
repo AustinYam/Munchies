@@ -189,7 +189,7 @@
 										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
+												<img src="./img/MunchiesLogo.jpg" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price"><span class="qty"></span></h3>
@@ -361,9 +361,10 @@
 											<td class="details">
 												<a href="#"><c:out value = "${product.getProduct_uniquename()}"/></a>
 											</td>
+											<fmt:formatNumber var = "item_total" type="currency" maxFractionDigits="2" value="${product.getProduct_price()*product.getProduct_quantity()}"/>
 											<td class="price text-center"><strong>$<c:out value = "${product.getProduct_price()}"/></strong><br></td>
 											<td class="qty text-center"><input class="input" type="number" value = "${product.getProduct_quantity()}"></td>
-											<td class="total text-center"><strong class="primary-color"><c:out value = "${total_cost}"/></strong></td>
+											<td class="total text-center"><strong class="primary-color"><c:out value = "${item_total}"/></strong></td>
 											<form id="checkout-form" class="clearfix" action = "CartAPI" method = "post">
 												<input type="hidden" name="product_id" value="${product.getProduct_id() }">
 												<input type="hidden" name="action" value="delete">

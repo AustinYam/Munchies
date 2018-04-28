@@ -147,9 +147,9 @@
 													<img src= "${item.getProduct_img()}" alt="nope">
 												</div>
 												<div class="product-body">
-													<h3 class="product-price"><a href="./ProductAPI?product_id=${product.getProduct_id()}"><c:out value = "${product.getProduct_uniquename()}"/></a></h2>
-													<h3 class="product-name">price: $<span class="qty"><c:out value = "${product.getProduct_price()}"/></span></h3>
-													<h3 class="product-name">qty: <span class="qty"><c:out value = "${product.getProduct_quantity()}"/></span></h3>
+													<h3 class="product-price"><a href="./ProductAPI?product_id=${item.getProduct_id()}"><c:out value = "${item.getProduct_uniquename()}"/></a></h2>
+													<h3 class="product-name">price: $<span class="qty"><c:out value = "${item.getProduct_price()}"/></span></h3>
+													<h3 class="product-name">qty: <span class="qty"><c:out value = "${item.getProduct_quantity()}"/></span></h3>
 												</div>
 												<form action="CartAPI" method = "post">
 													<input type="hidden" value="delete" name="action">
@@ -163,7 +163,7 @@
 										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
+												<img src="./img/MunchiesLogo.jpg" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price"><span class="qty"></span></h3>

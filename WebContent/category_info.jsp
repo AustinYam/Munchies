@@ -166,7 +166,7 @@
 										<%}else{%>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="" alt="">
+												<img src="./img/MunchiesLogo.jpg" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price"><span class="qty"></span></h3>
@@ -255,7 +255,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="./index.jsp">Home</a></li>
-				<li class="active">Products</li>
+				<li class="active"><c:out value = "${category}"/></li>
 			</ul>
 		</div>
 	</div>

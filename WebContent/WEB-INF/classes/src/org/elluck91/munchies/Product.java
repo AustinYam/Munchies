@@ -90,6 +90,13 @@ public class Product {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
+	
+	public boolean equals(Product p){
+		if (p.product_uniquename == this.product_uniquename)
+			return true;
+		else 
+			return false;
+	}
 
 	@Override
 	public String toString() {
