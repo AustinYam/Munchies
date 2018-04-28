@@ -270,7 +270,7 @@
 					<div class="banner banner-3">
 						<img src="./img/foodbanner2.jpg" alt="">
 						<div class="banner-caption text-center">
-							<h1 class="white-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
+							<h1 class="white-color">HOT DEAL<br><span class="white-color font-weak">Up to 20% OFF</span></h1>
 							<a href = "#shop"><button class="primary-btn">Shop Now</button></a>
 						</div>
 					</div>
