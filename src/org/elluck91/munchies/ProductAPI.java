@@ -1,25 +1,26 @@
 package org.elluck91.munchies;
 
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CategoryAPI
+ * Servlet implementation class ProductAPI
  */
-public class CategoryAPI extends HttpServlet {
+@WebServlet("/ProductAPI")
+public class ProductAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryAPI() {
+    public ProductAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +29,18 @@ public class CategoryAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// connect to DB
+		Product product = null;
+		String product_id = null;
 		DbManager db = new DbManager();
 		
-		String category = null;
-		ArrayList<Product> productList = null;
-		
-		if ((category = request.getParameter("category")) != null) {
-			 productList = db.getCategoryProducts(category);
+		if((product_id = request.getParameter("product_id")) != null) {
+			product = db.getProduct(request.getParameter("product_id"));
 		}
 		
-		request.setAttribute("categoryProducts", productList);
-		request.setAttribute("category", category);
+		request.setAttribute("product", product);
+		request.setAttribute("product_id", product_id);
 		RequestDispatcher requestDispatcher; 
-		requestDispatcher = request.getRequestDispatcher("/category_info.jsp");
+		requestDispatcher = request.getRequestDispatcher("/product_info.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

@@ -82,15 +82,15 @@ public class LoginAPI extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.getParameter("Login")!=null){
+		if(request.getParameter("Login")!=null) {
 			DbManager db = new DbManager();
 			User user = new User();
 
 			user.username= request.getParameter("username");
 			user.password = request.getParameter("pass");
-			System.out.println("Here");
 
-			if (db.Login(user.username, user.password)==1) {
+
+			if (db.Login(user.username, user.password) >= 1) {
 				HttpSession session = request.getSession();
 				// in seconds
 				session.setMaxInactiveInterval(600);
@@ -102,8 +102,10 @@ public class LoginAPI extends HttpServlet {
 				response.sendRedirect("./login.jsp?access=denied");
 			}
 		}
-
-
+		else {
+			System.out.println("Log in denied.");
+			response.sendRedirect("./login.jsp?access=denied");
+		}
 	}
 
 	/**

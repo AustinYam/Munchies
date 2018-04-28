@@ -1,25 +1,26 @@
 package org.elluck91.munchies;
 
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CategoryAPI
+ * Servlet implementation class ProductSearchAPI
  */
-public class CategoryAPI extends HttpServlet {
+@WebServlet("/ProductSearchAPI")
+public class ProductSearchAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryAPI() {
+    public ProductSearchAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,21 +29,27 @@ public class CategoryAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// connect to DB
-		DbManager db = new DbManager();
+		// TODO Auto-generated method stub
 		
-		String category = null;
-		ArrayList<Product> productList = null;
+		String searchTerm;
 		
-		if ((category = request.getParameter("category")) != null) {
-			 productList = db.getCategoryProducts(category);
+		if ((searchTerm = request.getParameter("product_name")) != null) {
+			System.out.println("searching for products: " + searchTerm);
+			ArrayList<Product> products = new ArrayList<Product>();
+			DbManager db = new DbManager();
+			
+			products = db.productSearch(searchTerm);
+			
+			request.setAttribute("searchedProducts", products);
+			request.setAttribute("search_term", searchTerm);
+			RequestDispatcher requestDispatcher; 
+			requestDispatcher = request.getRequestDispatcher("/productSearch_info.jsp");
+			requestDispatcher.forward(request, response);
 		}
 		
-		request.setAttribute("categoryProducts", productList);
-		request.setAttribute("category", category);
-		RequestDispatcher requestDispatcher; 
-		requestDispatcher = request.getRequestDispatcher("/category_info.jsp");
-		requestDispatcher.forward(request, response);
+		
+		
+		
 	}
 
 	/**

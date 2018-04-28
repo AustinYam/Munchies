@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.elluck91.munchies.DbManager;
-import org.elluck91.munchies.User;
-
 /**
  * Servlet implementation class RegisterAPI
  */
@@ -41,8 +38,6 @@ public class RegisterAPI extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(request.getParameter("Register") != null){
-			System.out.println("Hello2");
-
 			DbManager db = new DbManager();
 
 			User user = new User();
@@ -50,19 +45,21 @@ public class RegisterAPI extends HttpServlet {
 			user.username= request.getParameter("username");
 			user.email = request.getParameter("email");
 			user.password = request.getParameter("pass");
-		    user.lastlogin = new Date(0);
 		    user.name = request.getParameter("name");
+		    user.transactions = "";
 			int res = db.Register(user);
 			
 			System.out.println("Server response: " + res);
 			if(res == 1)
-				response.sendRedirect("./register.jsp?reg=done");
+				response.sendRedirect("./login.jsp");
 			else {
-				response.sendRedirect("./register.jsp?reg=duplicate");
+				response.sendRedirect("./register.jsp");
 			}
 		}
-		
-	}
+			else {
+				response.sendRedirect("./reg.jsp");
+			}
+		}
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)

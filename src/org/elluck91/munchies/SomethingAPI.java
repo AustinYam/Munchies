@@ -1,25 +1,23 @@
 package org.elluck91.munchies;
 
-import java.util.ArrayList;
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CategoryAPI
+ * Servlet implementation class SomethingAPI
  */
-public class CategoryAPI extends HttpServlet {
+@WebServlet("/SomethingAPI")
+public class SomethingAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CategoryAPI() {
+    public SomethingAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,21 +26,8 @@ public class CategoryAPI extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// connect to DB
-		DbManager db = new DbManager();
-		
-		String category = null;
-		ArrayList<Product> productList = null;
-		
-		if ((category = request.getParameter("category")) != null) {
-			 productList = db.getCategoryProducts(category);
-		}
-		
-		request.setAttribute("categoryProducts", productList);
-		request.setAttribute("category", category);
-		RequestDispatcher requestDispatcher; 
-		requestDispatcher = request.getRequestDispatcher("/category_info.jsp");
-		requestDispatcher.forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -51,6 +36,13 @@ public class CategoryAPI extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
+	 */
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }
