@@ -302,7 +302,7 @@
 			<div class="row">
 				<!-- banner -->
 				<div class="col-md-4 col-sm-6">
-					<a class="banner banner-1" href="./CategoryAPI?category=beverage">
+					<a class="banner banner-1" href="./CategoryAPI?category=beverages">
 						<img src="./img/wine.jpg" alt="">
 						<div class="banner-caption text-center">
 							<h1 class="white-color font-weak">Beverages</h2>
